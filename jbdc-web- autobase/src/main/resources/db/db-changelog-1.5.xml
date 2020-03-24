@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="add_first_cities" author="db@nikita.poddubskiy">
+        <insert tableName="cities">
+            <column name="city_id" value="1"/>
+            <column name="name" value="Dnepr"/>
+        </insert>
+        <insert tableName="cities">
+            <column name="city_id" value="2"/>
+            <column name="name" value="Moscow"/>
+        </insert>
+        <insert tableName="cities">
+            <column name="city_id" value="3"/>
+            <column name="name" value="Kiev"/>
+        </insert>
+        <insert tableName="cities">
+            <column name="city_id" value="4"/>
+            <column name="name" value="Hamburg"/>
+        </insert>
+        <insert tableName="cities">
+            <column name="city_id" value="5"/>
+            <column name="name" value="Copenhagen"/>
+        </insert>
+        <insert tableName="cities">
+            <column name="city_id" value="6"/>
+            <column name="name" value="Skagen"/>
+        </insert>
+        <insert tableName="cities">
+            <column name="city_id" value="7"/>
+            <column name="name" value="Rome"/>
+        </insert>
+        <insert tableName="cities">
+            <column name="city_id" value="8"/>
+            <column name="name" value="Milan"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="tag-1.4" author="db@nikita.poddubskiy">
+        <tagDatabase tag="1.4"/>
+    </changeSet>
+
+</databaseChangeLog>
