@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="add_first_transits" author="db@nikita.poddubskiy">
+        <insert tableName="transits">
+            <column name="transit_id" value="1"/>
+            <column name="status" value="OPENED"/>
+            <column name="transit_city_from" value="5"/>
+            <column name="transit_city_to" value="3"/>
+            <column name="transit_car" value="5"/>
+            <column name="transit_user" value="2"/>
+            <column name="transit_driver" value="3"/>
+        </insert>
+        <insert tableName="transits">
+            <column name="transit_id" value="2"/>
+            <column name="status" value="OPENED"/>
+            <column name="transit_city_from" value="1"/>
+            <column name="transit_city_to" value="2"/>
+            <column name="transit_car" value="3"/>
+            <column name="transit_user" value="2"/>
+            <column name="transit_driver" value="4"/>
+        </insert>
+        <insert tableName="transits">
+            <column name="transit_id" value="3"/>
+            <column name="status" value="OPENED"/>
+            <column name="transit_city_from" value="2"/>
+            <column name="transit_city_to" value="8"/>
+            <column name="transit_car" value="5"/>
+            <column name="transit_user" value="2"/>
+            <column name="transit_driver" value="4"/>
+        </insert>
+        <insert tableName="transits">
+            <column name="transit_id" value="4"/>
+            <column name="status" value="OPENED"/>
+            <column name="transit_city_from" value="3"/>
+            <column name="transit_city_to" value="7"/>
+            <column name="transit_car" value="1"/>
+            <column name="transit_user" value="2"/>
+            <column name="transit_driver" value="3"/>
+        </insert>
+        <insert tableName="transits">
+            <column name="transit_id" value="5"/>
+            <column name="status" value="OPENED"/>
+            <column name="transit_city_from" value="3"/>
+            <column name="transit_city_to" value="5"/>
+            <column name="transit_car" value="8"/>
+            <column name="transit_user" value="2"/>
+            <column name="transit_driver" value="4"/>
+        </insert>
+        <insert tableName="transits">
+            <column name="transit_id" value="6"/>
+            <column name="status" value="OPENED"/>
+            <column name="transit_city_from" value="4"/>
+            <column name="transit_city_to" value="5"/>
+            <column name="transit_car" value="1"/>
+            <column name="transit_user" value="2"/>
+            <column name="transit_driver" value="4"/>
+        </insert>
+        <insert tableName="transits">
+            <column name="transit_id" value="7"/>
+            <column name="status" value="OPENED"/>
+            <column name="transit_city_from" value="7"/>
+            <column name="transit_city_to" value="1"/>
+            <column name="transit_car" value="6"/>
+            <column name="transit_user" value="2"/>
+            <column name="transit_driver" value="3"/>
+        </insert>
+        <insert tableName="transits">
+            <column name="transit_id" value="8"/>
+            <column name="status" value="INPROGRESS"/>
+            <column name="transit_city_from" value="7"/>
+            <column name="transit_city_to" value="2"/>
+            <column name="transit_car" value="4"/>
+            <column name="transit_user" value="2"/>
+            <column name="transit_driver" value="4"/>
+        </insert>
+        <insert tableName="transits">
+            <column name="transit_id" value="9"/>
+            <column name="status" value="INPROGRESS"/>
+            <column name="transit_city_from" value="6"/>
+            <column name="transit_city_to" value="3"/>
+            <column name="transit_car" value="4"/>
+            <column name="transit_user" value="2"/>
+            <column name="transit_driver" value="3"/>
+        </insert>
+        <insert tableName="transits">
+            <column name="transit_id" value="10"/>
+            <column name="status" value="INPROGRESS"/>
+            <column name="transit_city_from" value="3"/>
+            <column name="transit_city_to" value="5"/>
+            <column name="transit_car" value="7"/>
+            <column name="transit_user" value="2"/>
+            <column name="transit_driver" value="4"/>
+        </insert>
+        <insert tableName="transits">
+            <column name="transit_id" value="11"/>
+            <column name="status" value="INPROGRESS"/>
+            <column name="transit_city_from" value="1"/>
+            <column name="transit_city_to" value="7"/>
+            <column name="transit_car" value="7"/>
+            <column name="transit_user" value="2"/>
+            <column name="transit_driver" value="3"/>
+        </insert>
+        <insert tableName="transits">
+            <column name="transit_id" value="12"/>
+            <column name="status" value="CANCELED"/>
+            <column name="transit_city_from" value="5"/>
+            <column name="transit_city_to" value="4"/>
+            <column name="transit_car" value="2"/>
+            <column name="transit_user" value="2"/>
+            <column name="transit_driver" value="3"/>
+        </insert>
+        <insert tableName="transits">
+            <column name="transit_id" value="13"/>
+            <column name="status" value="CANCELED"/>
+            <column name="transit_city_from" value="4"/>
+            <column name="transit_city_to" value="6"/>
+            <column name="transit_car" value="2"/>
+            <column name="transit_user" value="2"/>
+            <column name="transit_driver" value="4"/>
+        </insert>
+        <insert tableName="transits">
+            <column name="transit_id" value="14"/>
+            <column name="status" value="CANCELED"/>
+            <column name="transit_city_from" value="3"/>
+            <column name="transit_city_to" value="5"/>
+            <column name="transit_car" value="1"/>
+            <column name="transit_user" value="2"/>
+            <column name="transit_driver" value="3"/>
+        </insert>
+        <insert tableName="transits">
+            <column name="transit_id" value="15"/>
+            <column name="status" value="CLOSED"/>
+            <column name="transit_city_from" value="8"/>
+            <column name="transit_city_to" value="5"/>
+            <column name="transit_car" value="8"/>
+            <column name="transit_user" value="2"/>
+            <column name="transit_driver" value="4"/>
+        </insert>
+        <insert tableName="transits">
+            <column name="transit_id" value="16"/>
+            <column name="status" value="CLOSED"/>
+            <column name="transit_city_from" value="2"/>
+            <column name="transit_city_to" value="1"/>
+            <column name="transit_car" value="5"/>
+            <column name="transit_user" value="2"/>
+            <column name="transit_driver" value="4"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="tag-1.7" author="db@nikita.poddubskiy">
+        <tagDatabase tag="1.7"/>
+    </changeSet>
+
+</databaseChangeLog>

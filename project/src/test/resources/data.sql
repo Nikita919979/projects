@@ -1,0 +1,13 @@
+INSERT INTO cars (car_id, model, number, technical_passport, release_date, fully_Functional) VALUES (1, 'VAN', '016-01OA', 'vp4Tz6G6', '2017-02-18 00:00:00', 0);
+INSERT INTO cars (car_id, model, number, technical_passport, release_date, fully_Functional) VALUES (2, 'VOLVO', 'CA128TD', '6mrRr9D1', '2014-06-16 00:00:00', 1);
+INSERT INTO cars (car_id, model, number, technical_passport, release_date, fully_Functional) VALUES (3, 'MAN', 'testCarNumber1', 'testCarTechnicalPassport1', '2020-03-23 00:00:00', 1);
+INSERT INTO cities (city_id, name) VALUES (1, 'Dnepr');
+INSERT INTO cities (city_id, name) VALUES (2, 'Rome');
+INSERT INTO cities (city_id, name) VALUES (3, 'Moscow');
+INSERT INTO users (user_id, name, family_name, username, password, role, email) VALUES (1, 'Nikita', 'Poddubskiy', 'admin', '25f43b1486ad95a1398e3eeb3d83bc4010015fcc9bedb35b432e00298d5021f7', 'ADMIN', 'nikita919979@gmail.com');
+INSERT INTO users (user_id, name, family_name, username, password, role, email) VALUES (2, 'Mike', 'Petrov', 'dispatcher', 'a8c90fd571c6ceb25cbff41731c638be1392ead817a0c6745723756a5a48408a', 'DISPATCHER', 'qwerty919979@gmail.com');
+INSERT INTO orders (order_id, car_model, order_city_from, order_city_to, order_user) VALUES (1, 'MAN', 1, 2, 2);
+INSERT INTO orders (order_id, car_model, order_city_from, order_city_to, order_user) VALUES (2, 'VAN', 2, 1, 2);
+INSERT INTO orders (order_id, car_model, order_city_from, order_city_to, order_user) VALUES (3, 'MAN', 1, 2, 2);
+INSERT INTO transits (transit_id, status, transit_city_from, transit_city_to, transit_car, transit_user, transit_driver) VALUES (1, 'OPENED', 1, 1, 1, 2, 1);
+INSERT INTO transits (transit_id, status, transit_city_from, transit_city_to, transit_car, transit_user, transit_driver) VALUES (2, 'OPENED', 2, 2, 2, 1, 2);

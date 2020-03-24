@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="add_first_cars" author="db@nikita.poddubskiy">
+        <insert tableName="cars">
+            <column name="car_id" value="1"/>
+            <column name="model" value="MAN"/>
+            <column name="number" value="BM7105AX"/>
+            <column name="technical_passport" value="P1eH59hn"/>
+            <column name="release_date" value="2018-02-27 00:00:00"/>
+            <column name="fully_Functional" value="1"/>
+        </insert>
+        <insert tableName="cars">
+            <column name="car_id" value="2"/>
+            <column name="model" value="VAN"/>
+            <column name="number" value="016-01OA"/>
+            <column name="technical_passport" value="vp4Tz6G6"/>
+            <column name="release_date" value="2017-02-18 00:00:00"/>
+            <column name="fully_Functional" value="0"/>
+        </insert>
+        <insert tableName="cars">
+            <column name="car_id" value="3"/>
+            <column name="model" value="MAN"/>
+            <column name="number" value="20280BO"/>
+            <column name="technical_passport" value="rt7g58EY"/>
+            <column name="release_date" value="2020-01-01 00:00:00"/>
+            <column name="fully_Functional" value="1"/>
+        </insert>
+        <insert tableName="cars">
+            <column name="car_id" value="4"/>
+            <column name="model" value="VAN"/>
+            <column name="number" value="8903EAA"/>
+            <column name="technical_passport" value="VK171bby"/>
+            <column name="release_date" value="2015-08-15 00:00:00"/>
+            <column name="fully_Functional" value="0"/>
+        </insert>
+        <insert tableName="cars">
+            <column name="car_id" value="5"/>
+            <column name="model" value="VAN"/>
+            <column name="number" value="TAA17952"/>
+            <column name="technical_passport" value="y4J7b1Cj"/>
+            <column name="release_date" value="2012-02-09 00:00:00"/>
+            <column name="fully_Functional" value="1"/>
+        </insert>
+        <insert tableName="cars">
+            <column name="car_id" value="6"/>
+            <column name="model" value="MERCEDES"/>
+            <column name="number" value="AE618P"/>
+            <column name="technical_passport" value="9kOz63Ed"/>
+            <column name="release_date" value="2015-03-08 00:00:00"/>
+            <column name="fully_Functional" value="0"/>
+        </insert>
+        <insert tableName="cars">
+            <column name="car_id" value="7"/>
+            <column name="model" value="MAN"/>
+            <column name="number" value="RDX491"/>
+            <column name="technical_passport" value="42Hony8J"/>
+            <column name="release_date" value="2018-05-14 00:00:00"/>
+            <column name="fully_Functional" value="1"/>
+        </insert>
+        <insert tableName="cars">
+            <column name="car_id" value="8"/>
+            <column name="model" value="VOLVO"/>
+            <column name="number" value="CA128TD"/>
+            <column name="technical_passport" value="6mrRr9D1"/>
+            <column name="release_date" value="2014-06-16 00:00:00"/>
+            <column name="fully_Functional" value="1"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="tag-1.6" author="db@nikita.poddubskiy">
+        <tagDatabase tag="1.6"/>
+    </changeSet>
+
+</databaseChangeLog>

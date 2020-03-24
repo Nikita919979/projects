@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="add_first_users" author="db@nikita.poddubskiy">
+        <!--pass: admin1-->
+        <insert tableName="users">
+            <column name="user_id" value="1"/>
+            <column name="name" value="Nikita"/>
+            <column name="family_name" value="Poddubskiy"/>
+            <column name="username" value="admin"/>
+            <column name="password" value="25f43b1486ad95a1398e3eeb3d83bc4010015fcc9bedb35b432e00298d5021f7"/>
+            <column name="role" value="ADMIN"/>
+            <column name="email" value="nikita919979@gmail.com"/>
+        </insert>
+        <!--pass: dispatcher1-->
+        <insert tableName="users">
+            <column name="user_id" value="2"/>
+            <column name="name" value="Mike"/>
+            <column name="family_name" value="Petrov"/>
+            <column name="username" value="dispatcher"/>
+            <column name="password" value="a8c90fd571c6ceb25cbff41731c638be1392ead817a0c6745723756a5a48408a"/>
+            <column name="role" value="DISPATCHER"/>
+            <column name="email" value="qwerty919979@gmail.com"/>
+        </insert>
+        <!--pass: driver1-->
+        <insert tableName="users">
+            <column name="user_id" value="3"/>
+            <column name="name" value="Ivan"/>
+            <column name="family_name" value="Ivanov"/>
+            <column name="username" value="driver"/>
+            <column name="password" value="c8ffa9fcf473102b5526af2a62f39db33d006b49c8ee5324698bf1394556bd87"/>
+            <column name="role" value="DRIVER"/>
+            <column name="email" value="st9199790@i.ua"/>
+        </insert>
+        <!--pass: driver1-->
+        <insert tableName="users">
+            <column name="user_id" value="4"/>
+            <column name="name" value="Ignat"/>
+            <column name="family_name" value="Reznikov"/>
+            <column name="username" value="driver2"/>
+            <column name="password" value="c8ffa9fcf473102b5526af2a62f39db33d006b49c8ee5324698bf1394556bd87"/>
+            <column name="role" value="DRIVER"/>
+            <column name="email" value="st9199790@i.ua"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="tag-1.4" author="db@nikita.poddubskiy">
+        <tagDatabase tag="1.4"/>
+    </changeSet>
+
+</databaseChangeLog>
