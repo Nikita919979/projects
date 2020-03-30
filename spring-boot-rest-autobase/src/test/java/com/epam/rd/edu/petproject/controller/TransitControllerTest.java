@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.nio.charset.StandardCharsets;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.UUID;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.http.MediaType;
@@ -43,17 +44,19 @@ public class TransitControllerTest {
         .accept(APPLICATION_JSON_UTF8))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$", hasSize(2)))
-        .andExpect(jsonPath("$[0].id", is(inputTransitDtoList.get(0).getId())))
+        .andExpect(jsonPath("$[0].uuid", is(inputTransitDtoList.get(0).getUuid())))
         .andExpect(
-            jsonPath("$[0].city_from.id", is(inputTransitDtoList.get(0).getCity_from().getId())))
+            jsonPath("$[0].city_from.uuid",
+                is(inputTransitDtoList.get(0).getCity_from().getUuid())))
         .andExpect(
             jsonPath("$[0].city_from.name",
                 is(inputTransitDtoList.get(0).getCity_from().getName())))
-        .andExpect(jsonPath("$[0].city_to.id", is(inputTransitDtoList.get(0).getCity_to().getId())))
+        .andExpect(
+            jsonPath("$[0].city_to.uuid", is(inputTransitDtoList.get(0).getCity_to().getUuid())))
         .andExpect(
             jsonPath("$[0].city_to.name", is(inputTransitDtoList.get(0).getCity_to().getName())))
         .andExpect(jsonPath("$[0].status", is(inputTransitDtoList.get(0).getStatus().name())))
-        .andExpect(jsonPath("$[0].user.id", is(inputTransitDtoList.get(0).getUser().getId())))
+        .andExpect(jsonPath("$[0].user.uuid", is(inputTransitDtoList.get(0).getUser().getUuid())))
         .andExpect(jsonPath("$[0].user.name", is(inputTransitDtoList.get(0).getUser().getName())))
         .andExpect(jsonPath("$[0].user.familyName",
             is(inputTransitDtoList.get(0).getUser().getFamilyName())))
@@ -63,7 +66,8 @@ public class TransitControllerTest {
         .andExpect(
             jsonPath("$[0].user.role", is(inputTransitDtoList.get(0).getUser().getRole().name())))
         .andExpect(jsonPath("$[0].user.email", is(inputTransitDtoList.get(0).getUser().getEmail())))
-        .andExpect(jsonPath("$[0].driver.id", is(inputTransitDtoList.get(0).getDriver().getId())))
+        .andExpect(
+            jsonPath("$[0].driver.uuid", is(inputTransitDtoList.get(0).getDriver().getUuid())))
         .andExpect(
             jsonPath("$[0].driver.name", is(inputTransitDtoList.get(0).getDriver().getName())))
         .andExpect(jsonPath("$[0].driver.familyName",
@@ -78,7 +82,7 @@ public class TransitControllerTest {
                 is(inputTransitDtoList.get(0).getDriver().getRole().name())))
         .andExpect(
             jsonPath("$[0].driver.email", is(inputTransitDtoList.get(0).getDriver().getEmail())))
-        .andExpect(jsonPath("$[0].car.id", is(inputTransitDtoList.get(0).getCar().getId())))
+        .andExpect(jsonPath("$[0].car.uuid", is(inputTransitDtoList.get(0).getCar().getUuid())))
         .andExpect(
             jsonPath("$[0].car.model", is(inputTransitDtoList.get(0).getCar().getModel().name())))
         .andExpect(
@@ -91,17 +95,19 @@ public class TransitControllerTest {
                     DateTimeFormatter.ofPattern("dd-MM-yyyy")))))
         .andExpect(jsonPath("$[0].car.fully_Functional",
             is(inputTransitDtoList.get(0).getCar().isFully_Functional())))
-        .andExpect(jsonPath("$[1].id", is(inputTransitDtoList.get(1).getId())))
+        .andExpect(jsonPath("$[1].uuid", is(inputTransitDtoList.get(1).getUuid())))
         .andExpect(
-            jsonPath("$[1].city_from.id", is(inputTransitDtoList.get(1).getCity_from().getId())))
+            jsonPath("$[1].city_from.uuid",
+                is(inputTransitDtoList.get(1).getCity_from().getUuid())))
         .andExpect(
             jsonPath("$[1].city_from.name",
                 is(inputTransitDtoList.get(1).getCity_from().getName())))
-        .andExpect(jsonPath("$[1].city_to.id", is(inputTransitDtoList.get(1).getCity_to().getId())))
+        .andExpect(
+            jsonPath("$[1].city_to.uuid", is(inputTransitDtoList.get(1).getCity_to().getUuid())))
         .andExpect(
             jsonPath("$[1].city_to.name", is(inputTransitDtoList.get(1).getCity_to().getName())))
         .andExpect(jsonPath("$[1].status", is(inputTransitDtoList.get(1).getStatus().name())))
-        .andExpect(jsonPath("$[1].user.id", is(inputTransitDtoList.get(1).getUser().getId())))
+        .andExpect(jsonPath("$[1].user.uuid", is(inputTransitDtoList.get(1).getUser().getUuid())))
         .andExpect(jsonPath("$[1].user.name", is(inputTransitDtoList.get(1).getUser().getName())))
         .andExpect(jsonPath("$[1].user.familyName",
             is(inputTransitDtoList.get(1).getUser().getFamilyName())))
@@ -111,7 +117,8 @@ public class TransitControllerTest {
         .andExpect(
             jsonPath("$[1].user.role", is(inputTransitDtoList.get(1).getUser().getRole().name())))
         .andExpect(jsonPath("$[1].user.email", is(inputTransitDtoList.get(1).getUser().getEmail())))
-        .andExpect(jsonPath("$[1].driver.id", is(inputTransitDtoList.get(1).getDriver().getId())))
+        .andExpect(
+            jsonPath("$[1].driver.uuid", is(inputTransitDtoList.get(1).getDriver().getUuid())))
         .andExpect(
             jsonPath("$[1].driver.name", is(inputTransitDtoList.get(1).getDriver().getName())))
         .andExpect(jsonPath("$[1].driver.familyName",
@@ -126,7 +133,7 @@ public class TransitControllerTest {
                 is(inputTransitDtoList.get(1).getDriver().getRole().name())))
         .andExpect(
             jsonPath("$[1].driver.email", is(inputTransitDtoList.get(1).getDriver().getEmail())))
-        .andExpect(jsonPath("$[1].car.id", is(inputTransitDtoList.get(1).getCar().getId())))
+        .andExpect(jsonPath("$[1].car.uuid", is(inputTransitDtoList.get(1).getCar().getUuid())))
         .andExpect(
             jsonPath("$[1].car.model", is(inputTransitDtoList.get(1).getCar().getModel().name())))
         .andExpect(
@@ -145,23 +152,24 @@ public class TransitControllerTest {
   public void shouldReturnTransitDtoDetails() throws Exception {
     //Given
     TransitDto inputTransitDto = TestTransitDataGenerator.generateTransitDto(1);
-    given(transitService.read(1)).willReturn(inputTransitDto);
+    given(transitService.read(UUID.fromString("f1344876-71db-11ea-bc55-0242ac130003")))
+        .willReturn(inputTransitDto);
 
     //Then
-    mockMvc.perform(get("/transits/1")
+    mockMvc.perform(get("/transits/f1344876-71db-11ea-bc55-0242ac130003")
         .accept(APPLICATION_JSON_UTF8))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.id", is(inputTransitDto.getId())))
+        .andExpect(jsonPath("$.uuid", is(inputTransitDto.getUuid())))
         .andExpect(
-            jsonPath("$.city_from.id", is(inputTransitDto.getCity_from().getId())))
+            jsonPath("$.city_from.uuid", is(inputTransitDto.getCity_from().getUuid())))
         .andExpect(
             jsonPath("$.city_from.name",
                 is(inputTransitDto.getCity_from().getName())))
-        .andExpect(jsonPath("$.city_to.id", is(inputTransitDto.getCity_to().getId())))
+        .andExpect(jsonPath("$.city_to.uuid", is(inputTransitDto.getCity_to().getUuid())))
         .andExpect(
             jsonPath("$.city_to.name", is(inputTransitDto.getCity_to().getName())))
         .andExpect(jsonPath("$.status", is(inputTransitDto.getStatus().name())))
-        .andExpect(jsonPath("$.user.id", is(inputTransitDto.getUser().getId())))
+        .andExpect(jsonPath("$.user.uuid", is(inputTransitDto.getUser().getUuid())))
         .andExpect(jsonPath("$.user.name", is(inputTransitDto.getUser().getName())))
         .andExpect(jsonPath("$.user.familyName",
             is(inputTransitDto.getUser().getFamilyName())))
@@ -171,7 +179,7 @@ public class TransitControllerTest {
         .andExpect(
             jsonPath("$.user.role", is(inputTransitDto.getUser().getRole().name())))
         .andExpect(jsonPath("$.user.email", is(inputTransitDto.getUser().getEmail())))
-        .andExpect(jsonPath("$.driver.id", is(inputTransitDto.getDriver().getId())))
+        .andExpect(jsonPath("$.driver.uuid", is(inputTransitDto.getDriver().getUuid())))
         .andExpect(
             jsonPath("$.driver.name", is(inputTransitDto.getDriver().getName())))
         .andExpect(jsonPath("$.driver.familyName",
@@ -186,7 +194,7 @@ public class TransitControllerTest {
                 is(inputTransitDto.getDriver().getRole().name())))
         .andExpect(
             jsonPath("$.driver.email", is(inputTransitDto.getDriver().getEmail())))
-        .andExpect(jsonPath("$.car.id", is(inputTransitDto.getCar().getId())))
+        .andExpect(jsonPath("$.car.uuid", is(inputTransitDto.getCar().getUuid())))
         .andExpect(
             jsonPath("$.car.model", is(inputTransitDto.getCar().getModel().name())))
         .andExpect(
@@ -215,17 +223,17 @@ public class TransitControllerTest {
 //        .contentType(APPLICATION_JSON_UTF8))
 //        .andDo(MockMvcResultHandlers.print())
 //        .andExpect(status().isCreated())
-//        .andExpect(jsonPath("$.id", is(inputTransitDto.getId())))
+//        .andExpect(jsonPath("$.uuid", is(inputTransitDto.getId())))
 //        .andExpect(
-//            jsonPath("$.city_from.id", is(inputTransitDto.getCity_from().getId())))
+//            jsonPath("$.city_from.uuid", is(inputTransitDto.getCity_from().getId())))
 //        .andExpect(
 //            jsonPath("$.city_from.name",
 //                is(inputTransitDto.getCity_from().getName())))
-//        .andExpect(jsonPath("$.city_to.id", is(inputTransitDto.getCity_to().getId())))
+//        .andExpect(jsonPath("$.city_to.uuid", is(inputTransitDto.getCity_to().getId())))
 //        .andExpect(
 //            jsonPath("$.city_to.name", is(inputTransitDto.getCity_to().getName())))
 //        .andExpect(jsonPath("$.status", is(inputTransitDto.getStatus().name())))
-//        .andExpect(jsonPath("$.user.id", is(inputTransitDto.getUser().getId())))
+//        .andExpect(jsonPath("$.user.uuid", is(inputTransitDto.getUser().getId())))
 //        .andExpect(jsonPath("$.user.name", is(inputTransitDto.getUser().getName())))
 //        .andExpect(jsonPath("$.user.familyName",
 //            is(inputTransitDto.getUser().getFamilyName())))
@@ -235,7 +243,7 @@ public class TransitControllerTest {
 //        .andExpect(
 //            jsonPath("$.user.role", is(inputTransitDto.getUser().getRole().name())))
 //        .andExpect(jsonPath("$.user.email", is(inputTransitDto.getUser().getEmail())))
-//        .andExpect(jsonPath("$.driver.id", is(inputTransitDto.getDriver().getId())))
+//        .andExpect(jsonPath("$.driver.uuid", is(inputTransitDto.getDriver().getId())))
 //        .andExpect(
 //            jsonPath("$.driver.name", is(inputTransitDto.getDriver().getName())))
 //        .andExpect(jsonPath("$.driver.familyName",
@@ -250,7 +258,7 @@ public class TransitControllerTest {
 //                is(inputTransitDto.getDriver().getRole().name())))
 //        .andExpect(
 //            jsonPath("$.driver.email", is(inputTransitDto.getDriver().getEmail())))
-//        .andExpect(jsonPath("$.car.id", is(inputTransitDto.getCar().getId())))
+//        .andExpect(jsonPath("$.car.uuid", is(inputTransitDto.getCar().getId())))
 //        .andExpect(
 //            jsonPath("$.car.model", is(inputTransitDto.getCar().getModel().name())))
 //        .andExpect(
@@ -286,7 +294,7 @@ public class TransitControllerTest {
     ObjectMapper mapper = new ObjectMapper();
 
     //Then
-    mockMvc.perform(delete("/transits/1")
+    mockMvc.perform(delete("/transits/f1344876-71db-11ea-bc55-0242ac130003")
         .accept(APPLICATION_JSON_UTF8)
         .content(mapper.writeValueAsString(inputTransitDto))
         .contentType(APPLICATION_JSON_UTF8))

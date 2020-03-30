@@ -1,6 +1,7 @@
 package com.epam.rd.edu.petproject.dto;
 
 import com.epam.rd.edu.petproject.model.Transit;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TransitDto extends AbstractDto {
 
-  private Integer id;
+  private UUID uuid;
   private Transit.Status status;
   private CityDto city_from;
   private CityDto city_to;
@@ -21,7 +22,7 @@ public class TransitDto extends AbstractDto {
   private UserDto driver;
 
   public TransitDto(TransitDto transitDto) {
-    this.id = transitDto.id;
+    this.uuid = transitDto.uuid;
     this.status = transitDto.status;
     this.city_from = transitDto.city_from;
     this.city_to = transitDto.city_to;

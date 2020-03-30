@@ -1,9 +1,8 @@
 package com.epam.rd.edu.petproject.model;
 
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -17,17 +16,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "cities")
-public class City extends AbstractEntity<Integer> {
+public class City extends AbstractEntity<UUID> {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "city_id")
-  private Integer id;
+  @Column(name = "car_uuid", length = 36)
+  private UUID uuid = UUID.randomUUID();
   @Column(name = "name")
   private String name;
 
   public City(City city) {
-    this.id = city.id;
+    this.uuid = city.uuid;
     this.name = city.name;
   }
 

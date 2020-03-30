@@ -6,35 +6,35 @@
 
     <changeSet id="add_first_cities" author="db@nikita.poddubskiy">
         <insert tableName="cities">
-            <column name="city_id" value="1"/>
+            <column name="city_uuid" value="84cc6774-727e-11ea-bc55-0242ac130003"/>
             <column name="name" value="Dnepr"/>
         </insert>
         <insert tableName="cities">
-            <column name="city_id" value="2"/>
+            <column name="city_uuid" value="aa729b9c-727e-11ea-bc55-0242ac130003"/>
             <column name="name" value="Moscow"/>
         </insert>
         <insert tableName="cities">
-            <column name="city_id" value="3"/>
+            <column name="city_uuid" value="c9cd6f08-727e-11ea-bc55-0242ac130003"/>
             <column name="name" value="Kiev"/>
         </insert>
         <insert tableName="cities">
-            <column name="city_id" value="4"/>
+            <column name="city_uuid" value="f48aeebe-727e-11ea-bc55-0242ac130003"/>
             <column name="name" value="Hamburg"/>
         </insert>
         <insert tableName="cities">
-            <column name="city_id" value="5"/>
+            <column name="city_uuid" value="03dc135c-727f-11ea-bc55-0242ac130003"/>
             <column name="name" value="Copenhagen"/>
         </insert>
         <insert tableName="cities">
-            <column name="city_id" value="6"/>
+            <column name="city_uuid" value="69d489d2-727f-11ea-bc55-0242ac130003"/>
             <column name="name" value="Skagen"/>
         </insert>
         <insert tableName="cities">
-            <column name="city_id" value="7"/>
+            <column name="city_uuid" value="75da1fee-727f-11ea-bc55-0242ac130003"/>
             <column name="name" value="Rome"/>
         </insert>
         <insert tableName="cities">
-            <column name="city_id" value="8"/>
+            <column name="city_uuid" value="8"/>
             <column name="name" value="Milan"/>
         </insert>
     </changeSet>

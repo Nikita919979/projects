@@ -20,7 +20,7 @@ public class OrderConverter implements ModelConverter<Order, OrderDto> {
 
   @Override
   public OrderDto toDto(Order order) {
-    return OrderDto.builder().id(order.getId())
+    return OrderDto.builder().uuid(order.getUuid())
         .carModel(order.getCarModel())
         .city_from(cityConverter.toDto(order.getCity_from()))
         .city_to(cityConverter.toDto(order.getCity_to()))
@@ -30,7 +30,7 @@ public class OrderConverter implements ModelConverter<Order, OrderDto> {
 
   @Override
   public Order toEntity(OrderDto orderDto) {
-    return Order.builder().id(orderDto.getId())
+    return Order.builder().uuid(orderDto.getUuid())
         .carModel(orderDto.getCarModel())
         .city_from(cityConverter.toEntity(orderDto.getCity_from()))
         .city_to(cityConverter.toEntity(orderDto.getCity_to()))

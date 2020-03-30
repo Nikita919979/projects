@@ -6,7 +6,6 @@ import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import com.epam.rd.edu.petproject.converter.UserConverter;
@@ -20,6 +19,7 @@ import com.epam.rd.edu.petproject.utils.UserValidator;
 import com.epam.rd.edu.petproject.utils.datagenerator.TestUserDataGenerator;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import org.junit.Test;
 
 public class UserServiceImplTest {
@@ -43,8 +43,8 @@ public class UserServiceImplTest {
     UserDto userDtoVerify = sut.create(userDto);
 
     //Then
-    verify(userRepository, times(1)).save(user);
-    assertThat(userDtoVerify, hasProperty("id", is(userDto.getId())));
+    verify(userRepository).save(user);
+    assertThat(userDtoVerify, hasProperty("uuid", is(userDto.getUuid())));
     assertThat(userDtoVerify, hasProperty("name", is(userDto.getName())));
     assertThat(userDtoVerify, hasProperty("familyName", is(userDto.getFamilyName())));
     assertThat(userDtoVerify, hasProperty("login", is(userDto.getLogin())));
@@ -68,8 +68,8 @@ public class UserServiceImplTest {
     sut.create(userDto);
 
     //Then
-    verify(userRepository, times(1)).save(user);
-    verify(userRepository, times(1)).findByEmail(user.getEmail());
+    verify(userRepository).save(user);
+    verify(userRepository).findByEmail(user.getEmail());
   }
 
   @Test(expected = UserWithLoginExistException.class)
@@ -87,8 +87,8 @@ public class UserServiceImplTest {
     sut.create(userDto);
 
     //Then
-    verify(userRepository, times(1)).save(user);
-    verify(userRepository, times(1)).findByLogin(user.getLogin());
+    verify(userRepository).save(user);
+    verify(userRepository).findByLogin(user.getLogin());
   }
 
   @Test
@@ -97,13 +97,13 @@ public class UserServiceImplTest {
     UserDto userDto = TestUserDataGenerator.generateUserDtoWithRandomRole(1);
     User user = TestUserDataGenerator.getUser(userDto);
     Optional<User> userOptional = Optional.of(user);
-    doReturn(userOptional).when(userRepository).findById(user.getId());
+    doReturn(userOptional).when(userRepository).findById(user.getUuid());
 
     //When
-    sut.delete(1);
+    sut.delete(UUID.fromString("df9e5624-71db-11ea-bc55-0242ac130003"));
 
     //Then
-    verify(userRepository, times(1)).delete(user);
+    verify(userRepository).delete(user);
   }
 
   @Test
@@ -118,7 +118,7 @@ public class UserServiceImplTest {
     sut.update(userDto);
 
     //Then
-    verify(userRepository, times(1)).save(user);
+    verify(userRepository).save(user);
   }
 
   @Test
@@ -127,15 +127,16 @@ public class UserServiceImplTest {
     UserDto userDto = TestUserDataGenerator.generateUserDtoWithRandomRole(1);
     User user = TestUserDataGenerator.getUser(userDto);
     Optional<User> userOptional = Optional.of(user);
-    doReturn(userOptional).when(userRepository).findById(1);
+    doReturn(userOptional).when(userRepository)
+        .findById(UUID.fromString("df9e5624-71db-11ea-bc55-0242ac130003"));
     doReturn(userDto).when(userConverter).toDto(user);
 
     //When
-    UserDto userDtoVerify = sut.read(1);
+    UserDto userDtoVerify = sut.read(UUID.fromString("df9e5624-71db-11ea-bc55-0242ac130003"));
 
     //Then
-    verify(userConverter, times(1)).toDto(user);
-    assertThat(userDtoVerify, hasProperty("id", is(userDto.getId())));
+    verify(userConverter).toDto(user);
+    assertThat(userDtoVerify, hasProperty("uuid", is(userDto.getUuid())));
     assertThat(userDtoVerify, hasProperty("name", is(userDto.getName())));
     assertThat(userDtoVerify, hasProperty("familyName", is(userDto.getFamilyName())));
     assertThat(userDtoVerify, hasProperty("login", is(userDto.getLogin())));
@@ -156,10 +157,10 @@ public class UserServiceImplTest {
     List<UserDto> carDtoReturnList = sut.getAll();
 
     //Then
-    verify(userRepository, times(1)).findAll();
+    verify(userRepository).findAll();
     userDtoList.forEach(
         entity -> {
-          assertThat(carDtoReturnList, hasItem(hasProperty("id", is(entity.getId()))));
+          assertThat(carDtoReturnList, hasItem(hasProperty("uuid", is(entity.getUuid()))));
           assertThat(carDtoReturnList, hasItem(hasProperty("name", is(entity.getName()))));
           assertThat(carDtoReturnList,
               hasItem(hasProperty("familyName", is(entity.getFamilyName()))));
@@ -183,7 +184,7 @@ public class UserServiceImplTest {
     sut.updateAll(userDtoList);
 
     //Then
-    verify(userRepository, times(1)).saveAll(userList);
+    verify(userRepository).saveAll(userList);
   }
 
   @Test
@@ -199,10 +200,10 @@ public class UserServiceImplTest {
     List<UserDto> userDtoReturnList = sut.createAll(userDtoList);
 
     //Then
-    verify(userRepository, times(1)).saveAll(userList);
+    verify(userRepository).saveAll(userList);
     userDtoList.forEach(
         entity -> {
-          assertThat(userDtoReturnList, hasItem(hasProperty("id", is(entity.getId()))));
+          assertThat(userDtoReturnList, hasItem(hasProperty("uuid", is(entity.getUuid()))));
           assertThat(userDtoReturnList, hasItem(hasProperty("name", is(entity.getName()))));
           assertThat(userDtoReturnList,
               hasItem(hasProperty("familyName", is(entity.getFamilyName()))));

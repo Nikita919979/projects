@@ -16,6 +16,7 @@ import com.epam.rd.edu.petproject.utils.datagenerator.TestUserDataGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.UUID;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.http.MediaType;
@@ -42,13 +43,13 @@ public class UserControllerTest {
         .accept(APPLICATION_JSON_UTF8))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$", hasSize(2)))
-        .andExpect(jsonPath("$[0].id", is(inputUserDtoList.get(0).getId())))
+        .andExpect(jsonPath("$[0].uuid", is(inputUserDtoList.get(0).getUuid())))
         .andExpect(jsonPath("$[0].name", is(inputUserDtoList.get(0).getName())))
         .andExpect(jsonPath("$[0].familyName", is(inputUserDtoList.get(0).getFamilyName())))
         .andExpect(jsonPath("$[0].login", is(inputUserDtoList.get(0).getLogin())))
         .andExpect(jsonPath("$[0].role", is(inputUserDtoList.get(0).getRole().name())))
         .andExpect(jsonPath("$[0].email", is(inputUserDtoList.get(0).getEmail())))
-        .andExpect(jsonPath("$[1].id", is(inputUserDtoList.get(1).getId())))
+        .andExpect(jsonPath("$[1].uuid", is(inputUserDtoList.get(1).getUuid())))
         .andExpect(jsonPath("$[1].name", is(inputUserDtoList.get(1).getName())))
         .andExpect(jsonPath("$[1].familyName", is(inputUserDtoList.get(1).getFamilyName())))
         .andExpect(jsonPath("$[1].login", is(inputUserDtoList.get(1).getLogin())))
@@ -60,13 +61,14 @@ public class UserControllerTest {
   public void shouldReturnUserDtoDetails() throws Exception {
     //Given
     UserDto inputUserDto = TestUserDataGenerator.generateUserDtoWithRandomRole(1);
-    given(userService.read(1)).willReturn(inputUserDto);
+    given(userService.read(UUID.fromString("df9e5624-71db-11ea-bc55-0242ac130003")))
+        .willReturn(inputUserDto);
 
     //Then
-    mockMvc.perform(get("/users/1")
+    mockMvc.perform(get("/users/df9e5624-71db-11ea-bc55-0242ac130003")
         .accept(APPLICATION_JSON_UTF8))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.id", is(inputUserDto.getId())))
+        .andExpect(jsonPath("$.uuid", is(inputUserDto.getUuid())))
         .andExpect(jsonPath("$.name", is(inputUserDto.getName())))
         .andExpect(jsonPath("$.familyName", is(inputUserDto.getFamilyName())))
         .andExpect(jsonPath("$.login", is(inputUserDto.getLogin())))
@@ -87,7 +89,7 @@ public class UserControllerTest {
         .content(mapper.writeValueAsString(inputUserDto))
         .contentType(APPLICATION_JSON_UTF8))
         .andExpect(status().isCreated())
-        .andExpect(jsonPath("$.id", is(inputUserDto.getId())))
+        .andExpect(jsonPath("$.uuid", is(inputUserDto.getUuid())))
         .andExpect(jsonPath("$.name", is(inputUserDto.getName())))
         .andExpect(jsonPath("$.familyName", is(inputUserDto.getFamilyName())))
         .andExpect(jsonPath("$.login", is(inputUserDto.getLogin())))
@@ -116,7 +118,7 @@ public class UserControllerTest {
     ObjectMapper mapper = new ObjectMapper();
 
     //Then
-    mockMvc.perform(delete("/users/1")
+    mockMvc.perform(delete("/users/df9e5624-71db-11ea-bc55-0242ac130003")
         .accept(APPLICATION_JSON_UTF8)
         .content(mapper.writeValueAsString(inputUserDto))
         .contentType(APPLICATION_JSON_UTF8))

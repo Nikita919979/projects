@@ -2,16 +2,17 @@ package com.epam.rd.edu.petproject.service;
 
 import com.epam.rd.edu.petproject.dto.UserDto;
 import java.util.List;
+import java.util.UUID;
 
 public interface UserService {
 
   UserDto create(UserDto userDto);
 
-  void delete(Integer key);
+  void delete(UUID key);
 
   void update(UserDto userDto);
 
-  UserDto read(Integer key);
+  UserDto read(UUID key);
 
   List<UserDto> getAll();
 

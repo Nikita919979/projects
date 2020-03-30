@@ -16,6 +16,7 @@ import com.epam.rd.edu.petproject.utils.datagenerator.TestOrderDataGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.UUID;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.http.MediaType;
@@ -42,16 +43,17 @@ public class OrderControllerTest {
         .accept(APPLICATION_JSON_UTF8))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$", hasSize(2)))
-        .andExpect(jsonPath("$[0].id", is(inputOrderDtoList.get(0).getId())))
+        .andExpect(jsonPath("$[0].uuid", is(inputOrderDtoList.get(0).getUuid())))
         .andExpect(
-            jsonPath("$[0].city_from.id", is(inputOrderDtoList.get(0).getCity_from().getId())))
+            jsonPath("$[0].city_from.uuid", is(inputOrderDtoList.get(0).getCity_from().getUuid())))
         .andExpect(
             jsonPath("$[0].city_from.name", is(inputOrderDtoList.get(0).getCity_from().getName())))
-        .andExpect(jsonPath("$[0].city_to.id", is(inputOrderDtoList.get(0).getCity_to().getId())))
+        .andExpect(
+            jsonPath("$[0].city_to.uuid", is(inputOrderDtoList.get(0).getCity_to().getUuid())))
         .andExpect(
             jsonPath("$[0].city_to.name", is(inputOrderDtoList.get(0).getCity_to().getName())))
         .andExpect(jsonPath("$[0].carModel", is(inputOrderDtoList.get(0).getCarModel().name())))
-        .andExpect(jsonPath("$[0].user.id", is(inputOrderDtoList.get(0).getUser().getId())))
+        .andExpect(jsonPath("$[0].user.uuid", is(inputOrderDtoList.get(0).getUser().getUuid())))
         .andExpect(jsonPath("$[0].user.name", is(inputOrderDtoList.get(0).getUser().getName())))
         .andExpect(jsonPath("$[0].user.familyName",
             is(inputOrderDtoList.get(0).getUser().getFamilyName())))
@@ -61,16 +63,17 @@ public class OrderControllerTest {
         .andExpect(
             jsonPath("$[0].user.role", is(inputOrderDtoList.get(0).getUser().getRole().name())))
         .andExpect(jsonPath("$[0].user.email", is(inputOrderDtoList.get(0).getUser().getEmail())))
-        .andExpect(jsonPath("$[1].id", is(inputOrderDtoList.get(1).getId())))
+        .andExpect(jsonPath("$[1].uuid", is(inputOrderDtoList.get(1).getUuid())))
         .andExpect(
-            jsonPath("$[1].city_from.id", is(inputOrderDtoList.get(1).getCity_from().getId())))
+            jsonPath("$[1].city_from.uuid", is(inputOrderDtoList.get(1).getCity_from().getUuid())))
         .andExpect(
             jsonPath("$[1].city_from.name", is(inputOrderDtoList.get(1).getCity_from().getName())))
-        .andExpect(jsonPath("$[1].city_to.id", is(inputOrderDtoList.get(1).getCity_to().getId())))
+        .andExpect(
+            jsonPath("$[1].city_to.uuid", is(inputOrderDtoList.get(1).getCity_to().getUuid())))
         .andExpect(
             jsonPath("$[1].city_to.name", is(inputOrderDtoList.get(1).getCity_to().getName())))
         .andExpect(jsonPath("$[1].carModel", is(inputOrderDtoList.get(1).getCarModel().name())))
-        .andExpect(jsonPath("$[1].user.id", is(inputOrderDtoList.get(1).getUser().getId())))
+        .andExpect(jsonPath("$[1].user.uuid", is(inputOrderDtoList.get(1).getUser().getUuid())))
         .andExpect(jsonPath("$[1].user.name", is(inputOrderDtoList.get(1).getUser().getName())))
         .andExpect(jsonPath("$[1].user.familyName",
             is(inputOrderDtoList.get(1).getUser().getFamilyName())))
@@ -86,21 +89,22 @@ public class OrderControllerTest {
   public void shouldReturnCityDtoDetails() throws Exception {
     //Given
     OrderDto inputOrderDto = TestOrderDataGenerator.generateOrderDto(1);
-    given(orderService.read(1)).willReturn(inputOrderDto);
+    given(orderService.read(UUID.fromString("e731d0fa-71db-11ea-bc55-0242ac130003")))
+        .willReturn(inputOrderDto);
 
     //Then
-    mockMvc.perform(get("/orders/1")
+    mockMvc.perform(get("/orders/e731d0fa-71db-11ea-bc55-0242ac130003")
         .accept(APPLICATION_JSON_UTF8))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.id", is(inputOrderDto.getId())))
+        .andExpect(jsonPath("$.uuid", is(inputOrderDto.getUuid())))
         .andExpect(
-            jsonPath("$.city_from.id", is(inputOrderDto.getCity_from().getId())))
+            jsonPath("$.city_from.uuid", is(inputOrderDto.getCity_from().getUuid())))
         .andExpect(
             jsonPath("$.city_from.name", is(inputOrderDto.getCity_from().getName())))
-        .andExpect(jsonPath("$.city_to.id", is(inputOrderDto.getCity_to().getId())))
+        .andExpect(jsonPath("$.city_to.uuid", is(inputOrderDto.getCity_to().getUuid())))
         .andExpect(jsonPath("$.city_to.name", is(inputOrderDto.getCity_to().getName())))
         .andExpect(jsonPath("$.carModel", is(inputOrderDto.getCarModel().name())))
-        .andExpect(jsonPath("$.user.id", is(inputOrderDto.getUser().getId())))
+        .andExpect(jsonPath("$.user.uuid", is(inputOrderDto.getUser().getUuid())))
         .andExpect(jsonPath("$.user.name", is(inputOrderDto.getUser().getName())))
         .andExpect(jsonPath("$.user.familyName", is(inputOrderDto.getUser().getFamilyName())))
         .andExpect(jsonPath("$.user.login", is(inputOrderDto.getUser().getLogin())))
@@ -123,15 +127,15 @@ public class OrderControllerTest {
         .content(mapper.writeValueAsString(inputOrderDto))
         .contentType(APPLICATION_JSON_UTF8))
         .andExpect(status().isCreated())
-        .andExpect(jsonPath("$.id", is(inputOrderDto.getId())))
+        .andExpect(jsonPath("$.uuid", is(inputOrderDto.getUuid())))
         .andExpect(
-            jsonPath("$.city_from.id", is(inputOrderDto.getCity_from().getId())))
+            jsonPath("$.city_from.uuid", is(inputOrderDto.getCity_from().getUuid())))
         .andExpect(
             jsonPath("$.city_from.name", is(inputOrderDto.getCity_from().getName())))
-        .andExpect(jsonPath("$.city_to.id", is(inputOrderDto.getCity_to().getId())))
+        .andExpect(jsonPath("$.city_to.uuid", is(inputOrderDto.getCity_to().getUuid())))
         .andExpect(jsonPath("$.city_to.name", is(inputOrderDto.getCity_to().getName())))
         .andExpect(jsonPath("$.carModel", is(inputOrderDto.getCarModel().name())))
-        .andExpect(jsonPath("$.user.id", is(inputOrderDto.getUser().getId())))
+        .andExpect(jsonPath("$.user.uuid", is(inputOrderDto.getUser().getUuid())))
         .andExpect(jsonPath("$.user.name", is(inputOrderDto.getUser().getName())))
         .andExpect(jsonPath("$.user.familyName", is(inputOrderDto.getUser().getFamilyName())))
         .andExpect(jsonPath("$.user.login", is(inputOrderDto.getUser().getLogin())))
@@ -162,7 +166,7 @@ public class OrderControllerTest {
     ObjectMapper mapper = new ObjectMapper();
 
     //Then
-    mockMvc.perform(delete("/orders/1")
+    mockMvc.perform(delete("/orders/e731d0fa-71db-11ea-bc55-0242ac130003")
         .accept(APPLICATION_JSON_UTF8)
         .content(mapper.writeValueAsString(inputOrderDto))
         .contentType(APPLICATION_JSON_UTF8))

@@ -6,7 +6,7 @@
 
     <changeSet id="add_first_cars" author="db@nikita.poddubskiy">
         <insert tableName="cars">
-            <column name="car_id" value="1"/>
+            <column name="car_uuid" value="16b08d9a-7280-11ea-bc55-0242ac130003"/>
             <column name="model" value="MAN"/>
             <column name="number" value="BM7105AX"/>
             <column name="technical_passport" value="P1eH59hn"/>
@@ -14,7 +14,7 @@
             <column name="fully_Functional" value="1"/>
         </insert>
         <insert tableName="cars">
-            <column name="car_id" value="2"/>
+            <column name="car_uuid" value="278917ae-7280-11ea-bc55-0242ac130003"/>
             <column name="model" value="VAN"/>
             <column name="number" value="016-01OA"/>
             <column name="technical_passport" value="vp4Tz6G6"/>
@@ -22,7 +22,7 @@
             <column name="fully_Functional" value="0"/>
         </insert>
         <insert tableName="cars">
-            <column name="car_id" value="3"/>
+            <column name="car_uuid" value="49003f8e-7280-11ea-bc55-0242ac130003"/>
             <column name="model" value="MAN"/>
             <column name="number" value="20280BO"/>
             <column name="technical_passport" value="rt7g58EY"/>
@@ -30,7 +30,7 @@
             <column name="fully_Functional" value="1"/>
         </insert>
         <insert tableName="cars">
-            <column name="car_id" value="4"/>
+            <column name="car_uuid" value="576ede36-7280-11ea-bc55-0242ac130003"/>
             <column name="model" value="VAN"/>
             <column name="number" value="8903EAA"/>
             <column name="technical_passport" value="VK171bby"/>
@@ -38,7 +38,7 @@
             <column name="fully_Functional" value="0"/>
         </insert>
         <insert tableName="cars">
-            <column name="car_id" value="5"/>
+            <column name="car_uuid" value="7c827aa2-7280-11ea-bc55-0242ac130003"/>
             <column name="model" value="VAN"/>
             <column name="number" value="TAA17952"/>
             <column name="technical_passport" value="y4J7b1Cj"/>
@@ -46,7 +46,7 @@
             <column name="fully_Functional" value="1"/>
         </insert>
         <insert tableName="cars">
-            <column name="car_id" value="6"/>
+            <column name="car_uuid" value="87a888e0-7280-11ea-bc55-0242ac130003"/>
             <column name="model" value="MERCEDES"/>
             <column name="number" value="AE618P"/>
             <column name="technical_passport" value="9kOz63Ed"/>
@@ -54,7 +54,7 @@
             <column name="fully_Functional" value="0"/>
         </insert>
         <insert tableName="cars">
-            <column name="car_id" value="7"/>
+            <column name="car_uuid" value="916d2976-7280-11ea-bc55-0242ac130003"/>
             <column name="model" value="MAN"/>
             <column name="number" value="RDX491"/>
             <column name="technical_passport" value="42Hony8J"/>
@@ -62,7 +62,7 @@
             <column name="fully_Functional" value="1"/>
         </insert>
         <insert tableName="cars">
-            <column name="car_id" value="8"/>
+            <column name="car_uuid" value="f3b81884-7280-11ea-bc55-0242ac130003"/>
             <column name="model" value="VOLVO"/>
             <column name="number" value="CA128TD"/>
             <column name="technical_passport" value="6mrRr9D1"/>

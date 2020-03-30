@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public abstract class AbstractEntity<T extends Serializable> implements Cloneable {
 
-  public abstract void setId(T id);
+  public abstract T getUuid();
 
-  public abstract T getId();
+  public abstract void setUuid(T uuid);
 
   public abstract AbstractEntity clone();
 }

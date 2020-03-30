@@ -9,7 +9,6 @@ import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.AllOf.allOf;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import com.epam.rd.edu.petproject.converter.CarConverter;
@@ -20,6 +19,7 @@ import com.epam.rd.edu.petproject.service.impl.CarServiceImpl;
 import com.epam.rd.edu.petproject.utils.datagenerator.TestCarDataGenerator;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import org.junit.Test;
 
 public class CarServiceImplTest {
@@ -42,8 +42,8 @@ public class CarServiceImplTest {
 
     //Then
     verify(carRepository).save(car);
-    assertThat(carDtoVerify, hasProperty("id", is(carDto.getId())));
-//    assertThat(carDtoVerify, hasProperty("releaseDate", is(carDto.getReleaseDate())));
+    assertThat(carDtoVerify, hasProperty("uuid", is(carDto.getUuid())));
+    assertThat(carDtoVerify, hasProperty("releaseDate", is(carDto.getReleaseDate())));
     assertThat(carDtoVerify, hasProperty("fully_Functional", is(carDto.isFully_Functional())));
     assertThat(carDtoVerify,
         hasProperty("carTechnicalPassport", is(carDto.getCarTechnicalPassport())));
@@ -57,10 +57,10 @@ public class CarServiceImplTest {
     CarDto carDto = TestCarDataGenerator.generateCarDtoWithRandomModel(1);
     Car car = TestCarDataGenerator.getCar(carDto);
     Optional<Car> carOptional = Optional.of(car);
-    doReturn(carOptional).when(carRepository).findById(car.getId());
+    doReturn(carOptional).when(carRepository).findById(car.getUuid());
 
     //When
-    sut.delete(1);
+    sut.delete(UUID.fromString("8e45a958-71db-11ea-bc55-0242ac130003"));
 
     //Then
     verify(carRepository).delete(car);
@@ -87,14 +87,15 @@ public class CarServiceImplTest {
     CarDto carDto = TestCarDataGenerator.generateCarDtoWithRandomModel(1);
     Car car = TestCarDataGenerator.getCar(carDto);
     Optional<Car> carOptional = Optional.of(car);
-    doReturn(carOptional).when(carRepository).findById(1);
+    doReturn(carOptional).when(carRepository)
+        .findById(UUID.fromString("8e45a958-71db-11ea-bc55-0242ac130003"));
     doReturn(carDto).when(carConverter).toDto(car);
 
     //When
-    CarDto carDtoVerify = sut.read(1);
+    CarDto carDtoVerify = sut.read(UUID.fromString("8e45a958-71db-11ea-bc55-0242ac130003"));
 
     //Then
-    assertThat(carDtoVerify, hasProperty("id", is(carDto.getId())));
+    assertThat(carDtoVerify, hasProperty("uuid", is(carDto.getUuid())));
     assertThat(carDtoVerify, hasProperty("releaseDate", is(carDto.getReleaseDate())));
     assertThat(carDtoVerify, hasProperty("fully_Functional", is(carDto.isFully_Functional())));
     assertThat(carDtoVerify,
@@ -115,11 +116,11 @@ public class CarServiceImplTest {
     List<CarDto> carDtoReturnList = sut.getAll();
 
     //Then
-    verify(carRepository, times(1)).findAll();
+    verify(carRepository).findAll();
     assertThat(carDtoReturnList, not(is(empty())));
     carDtoList.forEach(
         entity -> {
-          assertThat(carDtoReturnList, hasItem((hasProperty("id", is(entity.getId())))));
+          assertThat(carDtoReturnList, hasItem((hasProperty("uuid", is(entity.getUuid())))));
           assertThat(carDtoReturnList,
               hasItem(hasProperty("releaseDate", is(entity.getReleaseDate()))));
           assertThat(carDtoReturnList,
@@ -145,7 +146,7 @@ public class CarServiceImplTest {
     sut.updateAll(carDtoList);
 
     //Then
-    verify(carRepository, times(1)).saveAll(carList);
+    verify(carRepository).saveAll(carList);
   }
 
   @Test
@@ -161,11 +162,11 @@ public class CarServiceImplTest {
     List<CarDto> carDtoReturnList = sut.createAll(carDtoList);
 
     //Then
-    verify(carRepository, times(1)).saveAll(carList);
+    verify(carRepository).saveAll(carList);
     assertThat(carDtoReturnList, not(is(empty())));
     carDtoList.forEach(
         entity -> assertThat(carDtoReturnList, hasItem(allOf(
-            hasProperty("id", is(entity.getId())),
+            hasProperty("uuid", is(entity.getUuid())),
             hasProperty("releaseDate", is(entity.getReleaseDate())),
             hasProperty("fully_Functional", is(entity.isFully_Functional())),
             hasProperty("carTechnicalPassport", is(entity.getCarTechnicalPassport())),

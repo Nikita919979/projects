@@ -8,6 +8,7 @@ import com.epam.rd.edu.petproject.repository.CityRepository;
 import com.epam.rd.edu.petproject.service.CityService;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class CityServiceImpl implements CityService {
   }
 
   @Override
-  public void delete(Integer key) {
+  public void delete(UUID key) {
     cityRepo.delete(cityRepo.findById(key).get());
   }
 
@@ -35,7 +36,7 @@ public class CityServiceImpl implements CityService {
   }
 
   @Override
-  public CityDto read(Integer key) {
+  public CityDto read(UUID key) {
     try {
       return cityConverter.toDto(cityRepo.findById(key).get());
     } catch (NoSuchElementException ex) {

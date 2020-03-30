@@ -15,6 +15,7 @@ import com.epam.rd.edu.petproject.model.User.Role;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lombok.experimental.UtilityClass;
@@ -36,7 +37,7 @@ public class TestTransitDataGenerator {
 
   public TransitDto generateTransitDto(int counter) {
     return TransitDto.builder()
-        .id(counter)
+        .uuid(UUID.randomUUID())
         .city_from(TestCityDataGenerator.generateCityDto(counter))
         .city_to(TestCityDataGenerator.generateCityDto(counter))
         .user(TestUserDataGenerator.generateUserDtoWithRandomRole(counter))
@@ -58,7 +59,7 @@ public class TestTransitDataGenerator {
     UserDto userDto = UserDto.builder()
         .email("nikita919979@gmail.com")
         .familyName("Poddubskiy")
-        .id(1)
+        .uuid(UUID.fromString("df9e5624-71db-11ea-bc55-0242ac130003"))
         .login("admin")
         .role(Role.ADMIN)
         .name("Nikita")
@@ -67,7 +68,7 @@ public class TestTransitDataGenerator {
     UserDto userDtoDriver = UserDto.builder()
         .email("qwerty919979@gmail.com")
         .familyName("Petrov")
-        .id(2)
+        .uuid(UUID.fromString("e3f1bb8a-71db-11ea-bc55-0242ac130003"))
         .login("dispatcher")
         .role(Role.DISPATCHER)
         .name("Mike")
@@ -75,12 +76,12 @@ public class TestTransitDataGenerator {
 
     CityDto city1 = CityDto.builder()
         .name("Dnepr")
-        .id(1)
+        .uuid(UUID.fromString("caad8f82-71db-11ea-bc55-0242ac130003"))
         .build();
 
     CityDto city2 = CityDto.builder()
         .name("Rome")
-        .id(2)
+        .uuid(UUID.fromString("cfd3fb4a-71db-11ea-bc55-0242ac130003"))
         .build();
 
     CarDto carDto = CarDto.builder()
@@ -88,7 +89,7 @@ public class TestTransitDataGenerator {
         .carTechnicalPassport("vp4Tz6G6")
         .fully_Functional(false)
         .releaseDate(LocalDate.of(2017, 02, 18))
-        .id(1)
+        .uuid(UUID.fromString("8e45a958-71db-11ea-bc55-0242ac130003"))
         .model(CarModel.VAN)
         .build();
 
@@ -99,7 +100,7 @@ public class TestTransitDataGenerator {
         .status(Status.INPROGRESS)
         .driver(userDtoDriver)
         .car(carDto)
-        .id(counter)
+        .uuid(UUID.randomUUID())
         .build();
   }
 }

@@ -12,7 +12,7 @@ public class CarConverter implements ModelConverter<Car, CarDto> {
   @Override
   public CarDto toDto(Car car) {
     return CarDto.builder()
-        .id(car.getId())
+        .uuid(car.getUuid())
         .carNumber(car.getCarNumber())
         .carTechnicalPassport(car.getCarTechnicalPassport())
         .model(car.getModel())
@@ -24,7 +24,7 @@ public class CarConverter implements ModelConverter<Car, CarDto> {
   @Override
   public Car toEntity(CarDto car) {
     return Car.builder()
-        .id(car.getId())
+        .uuid(car.getUuid())
         .carNumber(car.getCarNumber())
         .carTechnicalPassport(car.getCarTechnicalPassport())
         .model(car.getModel())

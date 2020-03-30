@@ -8,6 +8,7 @@ import com.epam.rd.edu.petproject.repository.CarRepository;
 import com.epam.rd.edu.petproject.service.CarService;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class CarServiceImpl implements CarService {
   }
 
   @Override
-  public void delete(Integer key) {
+  public void delete(UUID key) {
     carRepo.delete(carRepo.findById(key).get());
   }
 
@@ -35,7 +36,7 @@ public class CarServiceImpl implements CarService {
   }
 
   @Override
-  public CarDto read(Integer key) {
+  public CarDto read(UUID key) {
     try {
       return carConverter.toDto(carRepo.findById(key).get());
     } catch (NoSuchElementException ex) {

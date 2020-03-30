@@ -4,6 +4,7 @@ import com.epam.rd.edu.petproject.dto.TransitDto;
 import com.epam.rd.edu.petproject.service.TransitService;
 import com.epam.rd.edu.petproject.utils.aspect.Timed;
 import java.util.List;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,9 +25,9 @@ public class TransitController {
   private TransitService transitDtoService;
 
   @Timed
-  @GetMapping("/{id}")
-  public TransitDto getTransitDto(@PathVariable String id) {
-    return transitDtoService.read(Integer.parseInt(id));
+  @GetMapping("/{uuid}")
+  public TransitDto getTransitDto(@PathVariable String uuid) {
+    return transitDtoService.read(UUID.fromString(uuid));
   }
 
   @Timed
@@ -49,8 +50,8 @@ public class TransitController {
   }
 
   @Timed
-  @DeleteMapping(value = "/{id}")
-  public void deleteTransitDto(@PathVariable String id) {
-    transitDtoService.delete(Integer.parseInt(id));
+  @DeleteMapping(value = "/{uuid}")
+  public void deleteTransitDto(@PathVariable String uuid) {
+    transitDtoService.delete(UUID.fromString(uuid));
   }
 }

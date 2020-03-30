@@ -1,13 +1,11 @@
 package com.epam.rd.edu.petproject.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -21,12 +19,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-public class User extends AbstractEntity<Integer> {
+public class User extends AbstractEntity<UUID> {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "user_id")
-  private Integer id;
+  @Column(name = "user_uuid", length = 36)
+  private UUID uuid = UUID.randomUUID();
   @Column(name = "name")
   private String name;
   @Column(name = "family_name")
@@ -42,7 +39,7 @@ public class User extends AbstractEntity<Integer> {
   private String email;
 
   public User(User user) {
-    this.id = user.id;
+    this.uuid = user.uuid;
     this.name = user.name;
     this.familyName = user.familyName;
     this.login = user.login;
@@ -50,13 +47,12 @@ public class User extends AbstractEntity<Integer> {
     this.role = user.role;
   }
 
-  public enum Role implements Serializable {
-    ADMIN, DISPATCHER, DRIVER
-  }
-
   @Override
   public User clone() {
     return new User(this);
   }
 
+  public enum Role implements Serializable {
+    ADMIN, DISPATCHER, DRIVER
+  }
 }

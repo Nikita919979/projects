@@ -8,6 +8,7 @@ import com.epam.rd.edu.petproject.repository.TransitRepository;
 import com.epam.rd.edu.petproject.service.TransitService;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class TransitServiceImpl implements TransitService {
   }
 
   @Override
-  public void delete(Integer key) {
+  public void delete(UUID key) {
     transitRepo.delete(transitRepo.findById(key).get());
   }
 
@@ -35,7 +36,7 @@ public class TransitServiceImpl implements TransitService {
   }
 
   @Override
-  public TransitDto read(Integer key) {
+  public TransitDto read(UUID key) {
     try {
       return transitConverter.toDto(transitRepo.findById(key).get());
     } catch (NoSuchElementException ex) {

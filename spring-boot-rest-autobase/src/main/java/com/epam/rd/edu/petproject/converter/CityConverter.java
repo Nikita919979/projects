@@ -12,7 +12,7 @@ public class CityConverter implements ModelConverter<City, CityDto> {
   @Override
   public CityDto toDto(City city) {
     return CityDto.builder()
-        .id(city.getId())
+        .uuid(city.getUuid())
         .name(city.getName())
         .build();
   }
@@ -20,7 +20,7 @@ public class CityConverter implements ModelConverter<City, CityDto> {
   @Override
   public City toEntity(CityDto cityDto) {
     return City.builder()
-        .id(cityDto.getId())
+        .uuid(cityDto.getUuid())
         .name(cityDto.getName())
         .build();
   }

@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.nio.charset.StandardCharsets;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.UUID;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.http.MediaType;
@@ -41,7 +42,7 @@ public class CarControllerTest {
         .accept(APPLICATION_JSON_UTF8))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$", hasSize(2)))
-        .andExpect(jsonPath("$[0].id", is(inputCarDtoList.get(0).getId())))
+        .andExpect(jsonPath("$[0].uuid", is(inputCarDtoList.get(0).getUuid())))
         .andExpect(jsonPath("$[0].model", is(inputCarDtoList.get(0).getModel().name())))
         .andExpect(jsonPath("$[0].carNumber", is(inputCarDtoList.get(0).getCarNumber())))
         .andExpect(jsonPath("$[0].carTechnicalPassport",
@@ -51,7 +52,7 @@ public class CarControllerTest {
                 DateTimeFormatter.ofPattern("dd-MM-yyyy")))))
         .andExpect(
             jsonPath("$[0].fully_Functional", is(inputCarDtoList.get(0).isFully_Functional())))
-        .andExpect(jsonPath("$[1].id", is(inputCarDtoList.get(1).getId())))
+        .andExpect(jsonPath("$[1].uuid", is(inputCarDtoList.get(1).getUuid())))
         .andExpect(jsonPath("$[1].model", is(inputCarDtoList.get(1).getModel().name())))
         .andExpect(jsonPath("$[1].carNumber", is(inputCarDtoList.get(1).getCarNumber())))
         .andExpect(jsonPath("$[1].carTechnicalPassport",
@@ -67,13 +68,14 @@ public class CarControllerTest {
   public void shouldReturnCarDtoDetails() throws Exception {
     //Given
     CarDto inputCarDto = TestCarDataGenerator.generateCarDtoWithRandomModel(1);
-    given(carService.read(1)).willReturn(inputCarDto);
+    given(carService.read(UUID.fromString("8e45a958-71db-11ea-bc55-0242ac130003")))
+        .willReturn(inputCarDto);
 
     //Then
-    mockMvc.perform(get("/cars/1")
+    mockMvc.perform(get("/cars/8e45a958-71db-11ea-bc55-0242ac130003")
         .accept(APPLICATION_JSON_UTF8))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.id", is(inputCarDto.getId())))
+        .andExpect(jsonPath("$.uuid", is(inputCarDto.getUuid())))
         .andExpect(jsonPath("$.model", is(inputCarDto.getModel().name())))
         .andExpect(jsonPath("$.carNumber", is(inputCarDto.getCarNumber())))
         .andExpect(jsonPath("$.carTechnicalPassport", is(inputCarDto.getCarTechnicalPassport())))
@@ -96,7 +98,7 @@ public class CarControllerTest {
 //        .contentType(APPLICATION_JSON_UTF8))
 //        .andDo(MockMvcResultHandlers.print())
 //        .andExpect(status().isCreated())
-//        .andExpect(jsonPath("$.id", is(inputCarDto.getId())))
+//        .andExpect(jsonPath("$.uuid", is(inputCarDto.getId())))
 //        .andExpect(jsonPath("$.model", is(inputCarDto.getModel().name())))
 //        .andExpect(jsonPath("$.carNumber", is(inputCarDto.getCarNumber())))
 //        .andExpect(jsonPath("$.carTechnicalPassport", is(inputCarDto.getCarTechnicalPassport())))
@@ -122,15 +124,9 @@ public class CarControllerTest {
 
   @Test
   public void shouldDeleteCarWithStatusOk() throws Exception {
-    //Given
-    CarDto inputCarDto = TestCarDataGenerator.generateCarDtoWithRandomModel(1);
-    ObjectMapper mapper = new ObjectMapper();
-
     //Then
-    mockMvc.perform(delete("/cars/1")
-        .accept(APPLICATION_JSON_UTF8)
-        .content(mapper.writeValueAsString(inputCarDto))
-        .contentType(APPLICATION_JSON_UTF8))
+    mockMvc.perform(delete("/cars/b61cda14-71db-11ea-bc55-0242ac130003)")
+        .accept(APPLICATION_JSON_UTF8))
         .andExpect(status().isOk());
   }
 }

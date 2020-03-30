@@ -11,6 +11,7 @@ import com.epam.rd.edu.petproject.model.Order;
 import com.epam.rd.edu.petproject.model.User.Role;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lombok.experimental.UtilityClass;
@@ -30,7 +31,7 @@ public class TestOrderDataGenerator {
 
   public OrderDto generateOrderDto(int counter) {
     return OrderDto.builder()
-        .id(counter)
+        .uuid(UUID.randomUUID())
         .carModel(Arrays.stream(CarModel.values()).findAny().get())
         .city_from(TestCityDataGenerator.generateCityDto(counter))
         .city_to(TestCityDataGenerator.generateCityDto(counter))
@@ -50,7 +51,7 @@ public class TestOrderDataGenerator {
     UserDto userDto = UserDto.builder()
         .email("nikita919979@gmail.com")
         .familyName("Poddubskiy")
-        .id(1)
+        .uuid(UUID.fromString("df9e5624-71db-11ea-bc55-0242ac130003"))
         .login("admin")
         .role(Role.ADMIN)
         .name("Nikita")
@@ -58,12 +59,12 @@ public class TestOrderDataGenerator {
 
     CityDto city1 = CityDto.builder()
         .name("Dnepr")
-        .id(1)
+        .uuid(UUID.fromString("caad8f82-71db-11ea-bc55-0242ac130003"))
         .build();
 
     CityDto city2 = CityDto.builder()
         .name("Rome")
-        .id(2)
+        .uuid(UUID.fromString("cfd3fb4a-71db-11ea-bc55-0242ac130003"))
         .build();
 
     return OrderDto.builder()
@@ -71,7 +72,7 @@ public class TestOrderDataGenerator {
         .city_to(city1)
         .city_from(city2)
         .carModel(CarModel.MERCEDES)
-        .id(counter)
+        .uuid(UUID.randomUUID())
         .build();
   }
 }

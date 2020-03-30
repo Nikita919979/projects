@@ -1,12 +1,11 @@
 package com.epam.rd.edu.petproject.model;
 
 import java.io.Serializable;
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,12 +21,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "transits")
-public class Transit extends AbstractEntity<Integer> {
+public class Transit extends AbstractEntity<UUID> {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "transit_id")
-  private Integer id;
+  @Column(name = "car_uuid", length = 36)
+  private UUID uuid = UUID.randomUUID();
   @Column(name = "status")
   @Enumerated(EnumType.STRING)
   private Transit.Status status;
@@ -48,7 +46,7 @@ public class Transit extends AbstractEntity<Integer> {
   private User driver;
 
   public Transit(Transit transit) {
-    this.id = transit.id;
+    this.uuid = transit.uuid;
     this.status = transit.status;
     this.city_from = transit.city_from;
     this.city_to = transit.city_to;
@@ -57,13 +55,13 @@ public class Transit extends AbstractEntity<Integer> {
     this.driver = transit.driver;
   }
 
-  public enum Status implements Serializable {
-    OPENED, CLOSED, CANCELED, INPROGRESS
-  }
-
   @Override
   public Transit clone() {
     return new Transit(this);
+  }
+
+  public enum Status implements Serializable {
+    OPENED, CLOSED, CANCELED, INPROGRESS
   }
 
 }

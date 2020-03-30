@@ -12,6 +12,7 @@ import com.epam.rd.edu.petproject.utils.HashUtil;
 import com.epam.rd.edu.petproject.utils.UserValidator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +38,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public void delete(Integer key) {
+  public void delete(UUID key) {
     userRepo.delete(userRepo.findById(key).get());
   }
 
@@ -50,7 +51,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public UserDto read(Integer key) {
+  public UserDto read(UUID key) {
     try {
       return userConverter.toDto(userRepo.findById(key).get());
     } catch (NoSuchElementException ex) {

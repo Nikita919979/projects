@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import java.time.LocalDate;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +21,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CarDto extends AbstractDto {
 
-  private Integer id;
+  private UUID uuid;
   private Car.CarModel model;
   private String carNumber;
   private String carTechnicalPassport;
@@ -31,7 +32,7 @@ public class CarDto extends AbstractDto {
   private boolean fully_Functional;
 
   public CarDto(Car car) {
-    this.id = car.getId();
+    this.uuid = car.getUuid();
     this.model = car.getModel();
     this.carNumber = car.getCarNumber();
     this.carTechnicalPassport = car.getCarTechnicalPassport();
@@ -40,7 +41,7 @@ public class CarDto extends AbstractDto {
   }
 
   public CarDto(CarDto carDto) {
-    this.id = carDto.id;
+    this.uuid = carDto.uuid;
     this.model = carDto.model;
     this.carNumber = carDto.carNumber;
     this.carTechnicalPassport = carDto.carTechnicalPassport;

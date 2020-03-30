@@ -1,12 +1,10 @@
 package com.epam.rd.edu.petproject.model;
 
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,12 +20,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "orders")
-public class Order extends AbstractEntity<Integer> {
+public class Order extends AbstractEntity<UUID> {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "order_id")
-  private Integer id;
+  @Column(name = "car_uuid", length = 36)
+  private UUID uuid = UUID.randomUUID();
   @ManyToOne
   @JoinColumn(name = "order_city_from")
   private City city_from;
@@ -42,7 +39,7 @@ public class Order extends AbstractEntity<Integer> {
   private User user;
 
   public Order(Order transit) {
-    this.id = transit.id;
+    this.uuid = transit.uuid;
     this.city_from = transit.city_from;
     this.city_to = transit.city_to;
     this.carModel = transit.carModel;

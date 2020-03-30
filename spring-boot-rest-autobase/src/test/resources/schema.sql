@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS transits;
 
 create table users
 (
-    user_id     bigint auto_increment
+    user_uuid   VARCHAR(36)
         primary key,
     name        varchar(60)  not null,
     family_name varchar(60)  not null,
@@ -18,7 +18,7 @@ create table users
 
 create table cars
 (
-    car_id             bigint auto_increment
+    car_uuid           VARCHAR(36)
         primary key,
     model              varchar(60) not null,
     number             varchar(60) not null,
@@ -29,14 +29,14 @@ create table cars
 
 create table cities
 (
-    city_id bigint auto_increment
+    city_uuid bigint auto_increment
         primary key,
-    name    varchar(60) not null
+    name      varchar(60) not null
 );
 
 create table orders
 (
-    order_id        bigint auto_increment
+    order_uuid      VARCHAR(36)
         primary key,
     car_model       varchar(60) not null,
     order_city_from bigint      not null,
@@ -52,7 +52,7 @@ create table orders
 
 create table transits
 (
-    transit_id        bigint auto_increment
+    transit_uuid      VARCHAR(36)
         primary key,
     status            varchar(60) not null,
     transit_city_from bigint      not null,

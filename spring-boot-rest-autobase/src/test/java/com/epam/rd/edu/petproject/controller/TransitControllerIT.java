@@ -11,13 +11,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.epam.rd.edu.petproject.SpringAutobaseProjectTest;
 import com.epam.rd.edu.petproject.dto.TransitDto;
-import com.epam.rd.edu.petproject.model.Transit;
 import com.epam.rd.edu.petproject.model.Transit.Status;
-import com.epam.rd.edu.petproject.model.User;
 import com.epam.rd.edu.petproject.model.User.Role;
 import com.epam.rd.edu.petproject.utils.datagenerator.TestTransitDataGenerator;
 import java.nio.charset.StandardCharsets;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import org.junit.Test;
 import org.springframework.http.MediaType;
@@ -43,22 +42,22 @@ public class TransitControllerIT extends SpringAutobaseProjectTest {
         .contentType(APPLICATION_JSON_UTF8)
         .content(objectMapper.writeValueAsString(transitDto)))
         .andExpect(status().isCreated())
-        .andExpect(jsonPath("$.id", is(transitDto.getId())))
+        .andExpect(jsonPath("$.uuid", is(transitDto.getUuid())))
         .andExpect(jsonPath("$.status", is(transitDto.getStatus().name())))
         .andExpect(
-            jsonPath("$.city_from.id", is(transitDto.getCity_from().getId())))
+            jsonPath("$.city_from.uuid", is(transitDto.getCity_from().getUuid())))
         .andExpect(
             jsonPath("$.city_from.name", is(transitDto.getCity_from().getName())))
-        .andExpect(jsonPath("$.city_to.id", is(transitDto.getCity_to().getId())))
+        .andExpect(jsonPath("$.city_to.uuid", is(transitDto.getCity_to().getUuid())))
         .andExpect(jsonPath("$.city_to.name", is(transitDto.getCity_to().getName())))
-        .andExpect(jsonPath("$.user.id", is(transitDto.getUser().getId())))
+        .andExpect(jsonPath("$.user.uuid", is(transitDto.getUser().getUuid())))
         .andExpect(jsonPath("$.user.name", is(transitDto.getUser().getName())))
         .andExpect(jsonPath("$.user.familyName", is(transitDto.getUser().getFamilyName())))
         .andExpect(jsonPath("$.user.login", is(transitDto.getUser().getLogin())))
         .andExpect(
             jsonPath("$.user.role", is(transitDto.getUser().getRole().name())))
         .andExpect(jsonPath("$.user.email", is(transitDto.getUser().getEmail())))
-        .andExpect(jsonPath("$.driver.id", is(transitDto.getDriver().getId())))
+        .andExpect(jsonPath("$.driver.uuid", is(transitDto.getDriver().getUuid())))
         .andExpect(
             jsonPath("$.driver.name", is(transitDto.getDriver().getName())))
         .andExpect(jsonPath("$.driver.familyName",
@@ -70,7 +69,7 @@ public class TransitControllerIT extends SpringAutobaseProjectTest {
                 is(transitDto.getDriver().getRole().name())))
         .andExpect(
             jsonPath("$.driver.email", is(transitDto.getDriver().getEmail())))
-        .andExpect(jsonPath("$.car.id", is(transitDto.getCar().getId())))
+        .andExpect(jsonPath("$.car.uuid", is(transitDto.getCar().getUuid())))
         .andExpect(
             jsonPath("$.car.model", is(transitDto.getCar().getModel().name())))
         .andExpect(
@@ -84,24 +83,24 @@ public class TransitControllerIT extends SpringAutobaseProjectTest {
         .andExpect(jsonPath("$.car.fully_Functional",
             is(transitDto.getCar().isFully_Functional())));
 
-    mockMvc.perform(get("/transits/3")
+    mockMvc.perform(get("/transits/" + transitDto.getUuid().toString())
         .contentType(APPLICATION_JSON_UTF8))
-        .andExpect(jsonPath("$.id", is(transitDto.getId())))
+        .andExpect(jsonPath("$.uuid", is(transitDto.getUuid())))
         .andExpect(jsonPath("$.status", is(transitDto.getStatus().name())))
         .andExpect(
-            jsonPath("$.city_from.id", is(transitDto.getCity_from().getId())))
+            jsonPath("$.city_from.uuid", is(transitDto.getCity_from().getUuid())))
         .andExpect(
             jsonPath("$.city_from.name", is(transitDto.getCity_from().getName())))
-        .andExpect(jsonPath("$.city_to.id", is(transitDto.getCity_to().getId())))
+        .andExpect(jsonPath("$.city_to.uuid", is(transitDto.getCity_to().getUuid())))
         .andExpect(jsonPath("$.city_to.name", is(transitDto.getCity_to().getName())))
-        .andExpect(jsonPath("$.user.id", is(transitDto.getUser().getId())))
+        .andExpect(jsonPath("$.user.uuid", is(transitDto.getUser().getUuid())))
         .andExpect(jsonPath("$.user.name", is(transitDto.getUser().getName())))
         .andExpect(jsonPath("$.user.familyName", is(transitDto.getUser().getFamilyName())))
         .andExpect(jsonPath("$.user.login", is(transitDto.getUser().getLogin())))
         .andExpect(
             jsonPath("$.user.role", is(transitDto.getUser().getRole().name())))
         .andExpect(jsonPath("$.user.email", is(transitDto.getUser().getEmail())))
-        .andExpect(jsonPath("$.driver.id", is(transitDto.getDriver().getId())))
+        .andExpect(jsonPath("$.driver.uuid", is(transitDto.getDriver().getUuid())))
         .andExpect(
             jsonPath("$.driver.name", is(transitDto.getDriver().getName())))
         .andExpect(jsonPath("$.driver.familyName",
@@ -113,7 +112,7 @@ public class TransitControllerIT extends SpringAutobaseProjectTest {
                 is(transitDto.getDriver().getRole().name())))
         .andExpect(
             jsonPath("$.driver.email", is(transitDto.getDriver().getEmail())))
-        .andExpect(jsonPath("$.car.id", is(transitDto.getCar().getId())))
+        .andExpect(jsonPath("$.car.uuid", is(transitDto.getCar().getUuid())))
         .andExpect(
             jsonPath("$.car.model", is(transitDto.getCar().getModel().name())))
         .andExpect(
@@ -126,7 +125,6 @@ public class TransitControllerIT extends SpringAutobaseProjectTest {
                     DateTimeFormatter.ofPattern("dd-MM-yyyy")))))
         .andExpect(jsonPath("$.car.fully_Functional",
             is(transitDto.getCar().isFully_Functional())));
-    ;
   }
 
   @Test
@@ -142,24 +140,24 @@ public class TransitControllerIT extends SpringAutobaseProjectTest {
         .content(objectMapper.writeValueAsString(transitDto)))
         .andExpect(status().isOk());
 
-    mockMvc.perform(get("/transits/1")
+    mockMvc.perform(get("/transits/f1344876-71db-11ea-bc55-0242ac130003")
         .contentType(APPLICATION_JSON_UTF8))
-        .andExpect(jsonPath("$.id", is(transitDto.getId())))
+        .andExpect(jsonPath("$.uuid", is(transitDto.getUuid())))
         .andExpect(jsonPath("$.status", is(transitDto.getStatus().name())))
         .andExpect(
-            jsonPath("$.city_from.id", is(transitDto.getCity_from().getId())))
+            jsonPath("$.city_from.uuid", is(transitDto.getCity_from().getUuid())))
         .andExpect(
             jsonPath("$.city_from.name", is(transitDto.getCity_from().getName())))
-        .andExpect(jsonPath("$.city_to.id", is(transitDto.getCity_to().getId())))
+        .andExpect(jsonPath("$.city_to.uuid", is(transitDto.getCity_to().getUuid())))
         .andExpect(jsonPath("$.city_to.name", is(transitDto.getCity_to().getName())))
-        .andExpect(jsonPath("$.user.id", is(transitDto.getUser().getId())))
+        .andExpect(jsonPath("$.user.uuid", is(transitDto.getUser().getUuid())))
         .andExpect(jsonPath("$.user.name", is(transitDto.getUser().getName())))
         .andExpect(jsonPath("$.user.familyName", is(transitDto.getUser().getFamilyName())))
         .andExpect(jsonPath("$.user.login", is(transitDto.getUser().getLogin())))
         .andExpect(
             jsonPath("$.user.role", is(transitDto.getUser().getRole().name())))
         .andExpect(jsonPath("$.user.email", is(transitDto.getUser().getEmail())))
-        .andExpect(jsonPath("$.driver.id", is(transitDto.getDriver().getId())))
+        .andExpect(jsonPath("$.driver.uuid", is(transitDto.getDriver().getUuid())))
         .andExpect(
             jsonPath("$.driver.name", is(transitDto.getDriver().getName())))
         .andExpect(jsonPath("$.driver.familyName",
@@ -171,7 +169,7 @@ public class TransitControllerIT extends SpringAutobaseProjectTest {
                 is(transitDto.getDriver().getRole().name())))
         .andExpect(
             jsonPath("$.driver.email", is(transitDto.getDriver().getEmail())))
-        .andExpect(jsonPath("$.car.id", is(transitDto.getCar().getId())))
+        .andExpect(jsonPath("$.car.uuid", is(transitDto.getCar().getUuid())))
         .andExpect(
             jsonPath("$.car.model", is(transitDto.getCar().getModel().name())))
         .andExpect(
@@ -184,7 +182,6 @@ public class TransitControllerIT extends SpringAutobaseProjectTest {
                     DateTimeFormatter.ofPattern("dd-MM-yyyy")))))
         .andExpect(jsonPath("$.car.fully_Functional",
             is(transitDto.getCar().isFully_Functional())));
-    ;
   }
 
   @Test
@@ -192,10 +189,10 @@ public class TransitControllerIT extends SpringAutobaseProjectTest {
   @WithMockUser(username = "admin", password = "admin1", roles = {"ADMIN"})
   public void shouldDeleteTransitThroughAllLayers() throws Exception {
     //Then
-    mockMvc.perform(delete("/transits/2"))
+    mockMvc.perform(delete("/transits/f50eb9e0-71db-11ea-bc55-0242ac130003"))
         .andExpect(status().isOk());
 
-    mockMvc.perform(get("/transits/2"))
+    mockMvc.perform(get("/transits/f50eb9e0-71db-11ea-bc55-0242ac130003"))
         .andExpect(status().isNotFound());
   }
 
@@ -203,24 +200,24 @@ public class TransitControllerIT extends SpringAutobaseProjectTest {
   @WithMockUser(username = "admin", password = "admin1", roles = {"ADMIN"})
   public void shouldGetTransitThroughAllLayers() throws Exception {
     //Then
-    mockMvc.perform(get("/transits/2"))
+    mockMvc.perform(get("/transits/f50eb9e0-71db-11ea-bc55-0242ac130003"))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.id", is(2)))
+        .andExpect(jsonPath("$.uuid", is(2)))
         .andExpect(jsonPath("$.status", is(Status.OPENED.name())))
         .andExpect(
-            jsonPath("$.city_from.id", is(2)))
+            jsonPath("$.city_from.uuid", is(2)))
         .andExpect(
             jsonPath("$.city_from.name", is("Rome")))
-        .andExpect(jsonPath("$.city_to.id", is(2)))
+        .andExpect(jsonPath("$.city_to.uuid", is(2)))
         .andExpect(jsonPath("$.city_to.name", is("Rome")))
-        .andExpect(jsonPath("$.driver.id", is(2)))
+        .andExpect(jsonPath("$.driver.uuid", is(2)))
         .andExpect(jsonPath("$.driver.name", is("Mike")))
         .andExpect(jsonPath("$.driver.familyName", is("Petrov")))
         .andExpect(jsonPath("$.driver.login", is("dispatcher")))
         .andExpect(
             jsonPath("$.driver.role", is(Role.DISPATCHER.name())))
         .andExpect(jsonPath("$.driver.email", is("qwerty919979@gmail.com")))
-        .andExpect(jsonPath("$.user.id", is(1)))
+        .andExpect(jsonPath("$.user.uuid", is(1)))
         .andExpect(jsonPath("$.user.name", is("Nikita")))
         .andExpect(jsonPath("$.user.familyName", is("Poddubskiy")))
         .andExpect(jsonPath("$.user.login", is("admin")))
@@ -236,7 +233,9 @@ public class TransitControllerIT extends SpringAutobaseProjectTest {
     mockMvc.perform(get("/transits"))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$", hasSize(2)))
-        .andExpect(jsonPath("$[0].id", is(1)))
-        .andExpect(jsonPath("$[1].id", is(2)));
+        .andExpect(
+            jsonPath("$[0].uuid", is(UUID.fromString("f1344876-71db-11ea-bc55-0242ac130003"))))
+        .andExpect(
+            jsonPath("$[1].uuid", is(UUID.fromString("f50eb9e0-71db-11ea-bc55-0242ac130003"))));
   }
 }

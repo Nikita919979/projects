@@ -39,7 +39,7 @@ public class UserControllerIT extends SpringAutobaseProjectTest {
         .contentType(APPLICATION_JSON_UTF8)
         .content(objectMapper.writeValueAsString(userDto)))
         .andExpect(status().isCreated())
-        .andExpect(jsonPath("$.id", is(userDto.getId())))
+        .andExpect(jsonPath("$.uuid", is(userDto.getUuid())))
         .andExpect(jsonPath("$.name", is(userDto.getName())))
         .andExpect(jsonPath("$.familyName", is(userDto.getFamilyName())))
         .andExpect(jsonPath("$.login", is(userDto.getLogin())))
@@ -47,17 +47,16 @@ public class UserControllerIT extends SpringAutobaseProjectTest {
             jsonPath("$.role", is(userDto.getRole().name())))
         .andExpect(jsonPath("$.email", is(userDto.getEmail())));
 
-    mockMvc.perform(get("/users/3")
+    mockMvc.perform(get("/users/" + userDto.getUuid().toString())
         .contentType(APPLICATION_JSON_UTF8))
-        .andExpect(jsonPath("$.id", is(userDto.getId())))
-        .andExpect(jsonPath("$.id", is(userDto.getId())))
+        .andExpect(jsonPath("$.uuid", is(userDto.getUuid())))
+        .andExpect(jsonPath("$.uuid", is(userDto.getUuid())))
         .andExpect(jsonPath("$.name", is(userDto.getName())))
         .andExpect(jsonPath("$.familyName", is(userDto.getFamilyName())))
         .andExpect(jsonPath("$.login", is(userDto.getLogin())))
         .andExpect(
             jsonPath("$.role", is(userDto.getRole().name())))
         .andExpect(jsonPath("$.email", is(userDto.getEmail())));
-    ;
   }
 
   @Test
@@ -73,9 +72,9 @@ public class UserControllerIT extends SpringAutobaseProjectTest {
         .content(objectMapper.writeValueAsString(userDto)))
         .andExpect(status().isOk());
 
-    mockMvc.perform(get("/users/1")
+    mockMvc.perform(get("/users/df9e5624-71db-11ea-bc55-0242ac130003")
         .contentType(APPLICATION_JSON_UTF8))
-        .andExpect(jsonPath("$.id", is(userDto.getId())))
+        .andExpect(jsonPath("$.uuid", is(userDto.getUuid())))
         .andExpect(jsonPath("$.name", is(userDto.getName())))
         .andExpect(jsonPath("$.familyName", is(userDto.getFamilyName())))
         .andExpect(jsonPath("$.login", is(userDto.getLogin())))
@@ -89,10 +88,10 @@ public class UserControllerIT extends SpringAutobaseProjectTest {
   @WithMockUser(username = "admin", password = "admin1", roles = {"ADMIN"})
   public void shouldDeleteUserThroughAllLayers() throws Exception {
     //Then
-    mockMvc.perform(delete("/users/2"))
+    mockMvc.perform(delete("/users/e3f1bb8a-71db-11ea-bc55-0242ac130003"))
         .andExpect(status().isOk());
 
-    mockMvc.perform(get("/users/2"))
+    mockMvc.perform(get("/users/e3f1bb8a-71db-11ea-bc55-0242ac130003"))
         .andExpect(status().isNotFound());
   }
 
@@ -102,7 +101,7 @@ public class UserControllerIT extends SpringAutobaseProjectTest {
     //Then
     mockMvc.perform(get("/users/2"))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.id", is(2)))
+        .andExpect(jsonPath("$.uuid", is("e3f1bb8a-71db-11ea-bc55-0242ac130003")))
         .andExpect(jsonPath("$.name", is("Mike")))
         .andExpect(jsonPath("$.familyName", is("Petrov")))
         .andExpect(jsonPath("$.login", is("dispatcher")))
@@ -118,7 +117,7 @@ public class UserControllerIT extends SpringAutobaseProjectTest {
     mockMvc.perform(get("/users"))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$", hasSize(2)))
-        .andExpect(jsonPath("$[0].id", is(1)))
-        .andExpect(jsonPath("$[1].id", is(2)));
+        .andExpect(jsonPath("$[0].uuid", is(1)))
+        .andExpect(jsonPath("$[1].uuid", is(2)));
   }
 }

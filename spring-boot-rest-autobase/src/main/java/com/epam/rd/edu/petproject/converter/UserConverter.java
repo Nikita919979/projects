@@ -12,7 +12,7 @@ public class UserConverter implements ModelConverter<User, UserDto> {
   @Override
   public UserDto toDto(User user) {
     return UserDto.builder()
-        .id(user.getId())
+        .uuid(user.getUuid())
         .email(user.getEmail())
         .familyName(user.getFamilyName())
         .login(user.getLogin())
@@ -25,7 +25,7 @@ public class UserConverter implements ModelConverter<User, UserDto> {
   @Override
   public User toEntity(UserDto userDto) {
     return User.builder()
-        .id(userDto.getId())
+        .uuid(userDto.getUuid())
         .email(userDto.getEmail())
         .familyName(userDto.getFamilyName())
         .login(userDto.getLogin())

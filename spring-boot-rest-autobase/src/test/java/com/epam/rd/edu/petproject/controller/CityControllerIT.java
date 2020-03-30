@@ -11,13 +11,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.epam.rd.edu.petproject.SpringAutobaseProjectTest;
 import com.epam.rd.edu.petproject.dto.CityDto;
-import com.epam.rd.edu.petproject.utils.datagenerator.TestCarDataGenerator;
 import com.epam.rd.edu.petproject.utils.datagenerator.TestCityDataGenerator;
 import java.nio.charset.StandardCharsets;
-import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 import org.junit.Test;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.transaction.annotation.Transactional;
 
 public class CityControllerIT extends SpringAutobaseProjectTest {
@@ -37,12 +35,12 @@ public class CityControllerIT extends SpringAutobaseProjectTest {
         .contentType(APPLICATION_JSON_UTF8)
         .content(objectMapper.writeValueAsString(cityDto)))
         .andExpect(status().isCreated())
-        .andExpect(jsonPath("$.id", is(cityDto.getId())))
+        .andExpect(jsonPath("$.uuid", is(cityDto.getUuid())))
         .andExpect(jsonPath("$.name", is(cityDto.getName())));
 
-    mockMvc.perform(get("/cities/4")
+    mockMvc.perform(get("/cities/" + cityDto.getUuid().toString())
         .contentType(APPLICATION_JSON_UTF8))
-        .andExpect(jsonPath("$.id", is(cityDto.getId())))
+        .andExpect(jsonPath("$.uuid", is(cityDto.getUuid())))
         .andExpect(jsonPath("$.name", is(cityDto.getName())));
   }
 
@@ -58,9 +56,9 @@ public class CityControllerIT extends SpringAutobaseProjectTest {
         .content(objectMapper.writeValueAsString(cityDto)))
         .andExpect(status().isOk());
 
-    mockMvc.perform(get("/cities/1")
+    mockMvc.perform(get("/cities/caad8f82-71db-11ea-bc55-0242ac130003")
         .contentType(APPLICATION_JSON_UTF8))
-        .andExpect(jsonPath("$.id", is(cityDto.getId())))
+        .andExpect(jsonPath("$.uuid", is(cityDto.getUuid())))
         .andExpect(jsonPath("$.name", is(cityDto.getName())));
   }
 
@@ -68,19 +66,19 @@ public class CityControllerIT extends SpringAutobaseProjectTest {
   @Transactional
   public void shouldDeleteCityThroughAllLayers() throws Exception {
     //Then
-    mockMvc.perform(delete("/cities/3"))
+    mockMvc.perform(delete("/cities/d326965e-71db-11ea-bc55-0242ac130003"))
         .andExpect(status().isOk());
 
-    mockMvc.perform(get("/cities/3"))
+    mockMvc.perform(get("/cities/d326965e-71db-11ea-bc55-0242ac130003"))
         .andExpect(status().isNotFound());
   }
 
   @Test
   public void shouldGetCityThroughAllLayers() throws Exception {
     //Then
-    mockMvc.perform(get("/cities/3"))
+    mockMvc.perform(get("/cities/326965e-71db-11ea-bc55-0242ac130003"))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.id", is(3)))
+        .andExpect(jsonPath("$.uuid", is(UUID.fromString("d326965e-71db-11ea-bc55-0242ac130003"))))
         .andExpect(jsonPath("$.name", is("Moscow")));
   }
 
@@ -90,8 +88,11 @@ public class CityControllerIT extends SpringAutobaseProjectTest {
     mockMvc.perform(get("/cities"))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$", hasSize(3)))
-        .andExpect(jsonPath("$[0].id", is(1)))
-        .andExpect(jsonPath("$[1].id", is(2)))
-        .andExpect(jsonPath("$[2].id", is(3)));
+        .andExpect(
+            jsonPath("$[0].uuid", is(UUID.fromString("caad8f82-71db-11ea-bc55-0242ac130003"))))
+        .andExpect(
+            jsonPath("$[1].uuid", is(UUID.fromString("cfd3fb4a-71db-11ea-bc55-0242ac130003"))))
+        .andExpect(
+            jsonPath("$[2].uuid", is(UUID.fromString("d326965e-71db-11ea-bc55-0242ac130003"))));
   }
 }

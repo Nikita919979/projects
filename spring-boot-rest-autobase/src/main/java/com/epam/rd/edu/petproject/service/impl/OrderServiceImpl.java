@@ -8,6 +8,7 @@ import com.epam.rd.edu.petproject.repository.OrderRepository;
 import com.epam.rd.edu.petproject.service.OrderService;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class OrderServiceImpl implements OrderService {
   }
 
   @Override
-  public void delete(Integer key) {
+  public void delete(UUID key) {
     orderRepo.delete(orderRepo.findById(key).get());
   }
 
@@ -35,7 +36,7 @@ public class OrderServiceImpl implements OrderService {
   }
 
   @Override
-  public OrderDto read(Integer key) {
+  public OrderDto read(UUID key) {
     try {
       return orderConverter.toDto(orderRepo.findById(key).get());
     } catch (

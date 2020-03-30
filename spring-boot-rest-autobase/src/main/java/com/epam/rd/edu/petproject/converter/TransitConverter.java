@@ -23,7 +23,7 @@ public class TransitConverter implements ModelConverter<Transit, TransitDto> {
 
   @Override
   public TransitDto toDto(Transit transit) {
-    return TransitDto.builder().id(transit.getId())
+    return TransitDto.builder().uuid(transit.getUuid())
         .car(carConverter.toDto(transit.getCar()))
         .city_from(cityConverter.toDto(transit.getCity_from()))
         .city_to(cityConverter.toDto(transit.getCity_to()))
@@ -36,7 +36,7 @@ public class TransitConverter implements ModelConverter<Transit, TransitDto> {
   @Override
   public Transit toEntity(TransitDto transitDto) {
     return Transit.builder()
-        .id(transitDto.getId())
+        .uuid(transitDto.getUuid())
         .car(carConverter.toEntity(transitDto.getCar()))
         .city_from(cityConverter.toEntity(transitDto.getCity_from()))
         .city_to(cityConverter.toEntity(transitDto.getCity_to()))

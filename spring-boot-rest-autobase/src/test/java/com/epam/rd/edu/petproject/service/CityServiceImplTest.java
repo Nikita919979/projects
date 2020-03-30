@@ -8,7 +8,6 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import com.epam.rd.edu.petproject.converter.CityConverter;
@@ -19,6 +18,7 @@ import com.epam.rd.edu.petproject.service.impl.CityServiceImpl;
 import com.epam.rd.edu.petproject.utils.datagenerator.TestCityDataGenerator;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import org.junit.Test;
 
 public class CityServiceImplTest {
@@ -41,7 +41,7 @@ public class CityServiceImplTest {
 
     //Then
     verify(cityRepository).save(city);
-    assertThat(cityDtoVerify, hasProperty("id", is(cityDto.getId())));
+    assertThat(cityDtoVerify, hasProperty("uuid", is(cityDto.getUuid())));
     assertThat(cityDtoVerify, hasProperty("name", is(cityDto.getName())));
   }
 
@@ -51,13 +51,13 @@ public class CityServiceImplTest {
     CityDto cityDto = TestCityDataGenerator.generateCityDto(1);
     City city = TestCityDataGenerator.getCity(cityDto);
     Optional<City> carOptional = Optional.of(city);
-    doReturn(carOptional).when(cityRepository).findById(city.getId());
+    doReturn(carOptional).when(cityRepository).findById(city.getUuid());
 
     //When
-    sut.delete(1);
+    sut.delete(UUID.fromString("caad8f82-71db-11ea-bc55-0242ac130003"));
 
     //Then
-    verify(cityRepository, times(1)).delete(city);
+    verify(cityRepository).delete(city);
   }
 
   @Test
@@ -72,7 +72,7 @@ public class CityServiceImplTest {
     sut.update(cityDto);
 
     //Then
-    verify(cityRepository, times(1)).save(city);
+    verify(cityRepository).save(city);
   }
 
   @Test
@@ -81,15 +81,16 @@ public class CityServiceImplTest {
     CityDto cityDto = TestCityDataGenerator.generateCityDto(1);
     City city = TestCityDataGenerator.getCity(cityDto);
     Optional<City> carOptional = Optional.of(city);
-    doReturn(carOptional).when(cityRepository).findById(1);
+    doReturn(carOptional).when(cityRepository)
+        .findById(UUID.fromString("caad8f82-71db-11ea-bc55-0242ac130003"));
     doReturn(cityDto).when(cityConverter).toDto(city);
 
     //When
-    CityDto cityDtoVerify = sut.read(1);
+    CityDto cityDtoVerify = sut.read(UUID.fromString("caad8f82-71db-11ea-bc55-0242ac130003"));
 
     //Then
-    verify(cityRepository, times(1)).findById(1);
-    assertThat(cityDtoVerify, hasProperty("id", is(cityDto.getId())));
+    verify(cityRepository).findById(UUID.fromString("caad8f82-71db-11ea-bc55-0242ac130003"));
+    assertThat(cityDtoVerify, hasProperty("uuid", is(cityDto.getUuid())));
     assertThat(cityDtoVerify, hasProperty("name", is(cityDto.getName())));
   }
 
@@ -105,11 +106,11 @@ public class CityServiceImplTest {
     List<CityDto> cityDtoReturnList = sut.getAll();
 
     //Then
-    verify(cityRepository, times(1)).findAll();
+    verify(cityRepository).findAll();
     assertThat(cityDtoReturnList, not(is(empty())));
     cityDtoList.forEach(
         entity -> {
-          assertThat(cityDtoReturnList, hasItem((hasProperty("id", is(entity.getId())))));
+          assertThat(cityDtoReturnList, hasItem((hasProperty("uuid", is(entity.getUuid())))));
           assertThat(cityDtoReturnList,
               hasItem(hasProperty("name", is(entity.getName()))));
         }
@@ -128,8 +129,8 @@ public class CityServiceImplTest {
     sut.updateAll(cityDtoList);
 
     //Then
-    verify(cityRepository, times(1)).saveAll(cityList);
-    verify(cityConverter, times(1)).toEntityList(cityDtoList);
+    verify(cityRepository).saveAll(cityList);
+    verify(cityConverter).toEntityList(cityDtoList);
   }
 
   @Test
@@ -145,11 +146,11 @@ public class CityServiceImplTest {
     List<CityDto> cityDtoReturnList = sut.createAll(cityDtoList);
 
     //Then
-    verify(cityRepository, times(1)).saveAll(cityList);
+    verify(cityRepository).saveAll(cityList);
     assertThat(cityDtoReturnList, not(is(empty())));
     cityDtoList.forEach(
         entity -> {
-          assertThat(cityDtoReturnList, hasItem((hasProperty("id", is(entity.getId())))));
+          assertThat(cityDtoReturnList, hasItem((hasProperty("uuid", is(entity.getUuid())))));
           assertThat(cityDtoReturnList,
               hasItem(hasProperty("name", is(entity.getName()))));
         }

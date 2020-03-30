@@ -6,30 +6,30 @@
 
     <changeSet id="create_transits" author="db@nikita.poddubskiy">
         <createTable tableName="transits">
-            <column name="transit_id" type="BIGINT" autoIncrement="true">
+            <column name="transit_uuid" type="VARCHAR(36)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="status" type="varchar(60)">
                 <constraints nullable="false"/>
             </column>
-            <column name="transit_city_from" type="BIGINT">
-                <constraints nullable="false" foreignKeyName="fk_transit_city_from" referencedColumnNames="city_id"
+            <column name="transit_city_from" type="VARCHAR(36)">
+                <constraints nullable="false" foreignKeyName="fk_transit_city_from" referencedColumnNames="city_uuid"
                              referencedTableName="cities"/>
             </column>
-            <column name="transit_city_to" type="BIGINT">
-                <constraints nullable="false" foreignKeyName="fk_transit_city_to" referencedColumnNames="city_id"
+            <column name="transit_city_to" type="VARCHAR(36)">
+                <constraints nullable="false" foreignKeyName="fk_transit_city_to" referencedColumnNames="city_uuid"
                              referencedTableName="cities"/>
             </column>
-            <column name="transit_car" type="BIGINT">
-                <constraints nullable="false" foreignKeyName="fk_transit_car" referencedColumnNames="car_id"
+            <column name="transit_car" type="VARCHAR(36)">
+                <constraints nullable="false" foreignKeyName="fk_transit_car" referencedColumnNames="car_uuid"
                              referencedTableName="cars"/>
             </column>
-            <column name="transit_user" type="BIGINT">
-                <constraints nullable="false" foreignKeyName="fk_transit_user" referencedColumnNames="user_id"
+            <column name="transit_user" type="VARCHAR(36)">
+                <constraints nullable="false" foreignKeyName="fk_transit_user" referencedColumnNames="user_uuid"
                              referencedTableName="users"/>
             </column>
-            <column name="transit_driver" type="BIGINT">
-                <constraints nullable="false" foreignKeyName="fk_transit_driver" referencedColumnNames="user_id"
+            <column name="transit_driver" type="VARCHAR(36)">
+                <constraints nullable="false" foreignKeyName="fk_transit_driver" referencedColumnNames="user_uuid"
                              referencedTableName="users"/>
             </column>
         </createTable>

@@ -4,6 +4,7 @@ import com.epam.rd.edu.petproject.converter.CityConverter;
 import com.epam.rd.edu.petproject.dto.CityDto;
 import com.epam.rd.edu.petproject.model.City;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lombok.experimental.UtilityClass;
@@ -21,7 +22,7 @@ public class TestCityDataGenerator {
 
   public CityDto generateCityDto(int counter) {
     return CityDto.builder()
-        .id(counter)
+        .uuid(UUID.randomUUID())
         .name("testName" + counter)
         .build();
   }

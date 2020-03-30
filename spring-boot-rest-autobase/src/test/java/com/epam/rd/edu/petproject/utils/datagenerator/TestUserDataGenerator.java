@@ -6,6 +6,7 @@ import com.epam.rd.edu.petproject.model.User;
 import com.epam.rd.edu.petproject.model.User.Role;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lombok.experimental.UtilityClass;
@@ -23,7 +24,7 @@ public class TestUserDataGenerator {
 
   public UserDto generateUserDto(int counter, User.Role role) {
     return UserDto.builder()
-        .id(counter)
+        .uuid(UUID.randomUUID())
         .email("testEmail" + counter + "@gmail.com")
         .familyName("testFamilyName" + counter)
         .login("testLogin" + counter)
@@ -35,7 +36,7 @@ public class TestUserDataGenerator {
 
   public UserDto generateUserDtoWithRandomRole(int counter) {
     return UserDto.builder()
-        .id(counter)
+        .uuid(UUID.randomUUID())
         .email("testEmail" + counter + "@gmail.com")
         .familyName("testFamilyName" + counter)
         .login("testLogin" + counter)

@@ -16,6 +16,7 @@ import com.epam.rd.edu.petproject.utils.datagenerator.TestCityDataGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.UUID;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.http.MediaType;
@@ -42,9 +43,9 @@ public class CityControllerTest {
         .accept(APPLICATION_JSON_UTF8))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$", hasSize(2)))
-        .andExpect(jsonPath("$[0].id", is(inputCityDtoList.get(0).getId())))
+        .andExpect(jsonPath("$[0].uuid", is(inputCityDtoList.get(0).getUuid())))
         .andExpect(jsonPath("$[0].name", is(inputCityDtoList.get(0).getName())))
-        .andExpect(jsonPath("$[1].id", is(inputCityDtoList.get(1).getId())))
+        .andExpect(jsonPath("$[1].uuid", is(inputCityDtoList.get(1).getUuid())))
         .andExpect(jsonPath("$[1].name", is(inputCityDtoList.get(1).getName())));
   }
 
@@ -52,13 +53,14 @@ public class CityControllerTest {
   public void shouldReturnCityDtoDetails() throws Exception {
     //Given
     CityDto inputCityDto = TestCityDataGenerator.generateCityDto(1);
-    given(cityService.read(1)).willReturn(inputCityDto);
+    given(cityService.read(UUID.fromString("caad8f82-71db-11ea-bc55-0242ac130003")))
+        .willReturn(inputCityDto);
 
     //Then
-    mockMvc.perform(get("/cities/1")
+    mockMvc.perform(get("/cities/caad8f82-71db-11ea-bc55-0242ac130003")
         .accept(APPLICATION_JSON_UTF8))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.id", is(inputCityDto.getId())))
+        .andExpect(jsonPath("$.uuid", is(inputCityDto.getUuid())))
         .andExpect(jsonPath("$.name", is(inputCityDto.getName())));
   }
 
@@ -75,7 +77,7 @@ public class CityControllerTest {
         .content(mapper.writeValueAsString(inputCityDto))
         .contentType(APPLICATION_JSON_UTF8))
         .andExpect(status().isCreated())
-        .andExpect(jsonPath("$.id", is(inputCityDto.getId())))
+        .andExpect(jsonPath("$.uuid", is(inputCityDto.getUuid())))
         .andExpect(jsonPath("$.name", is(inputCityDto.getName())));
   }
 
@@ -100,7 +102,7 @@ public class CityControllerTest {
     ObjectMapper mapper = new ObjectMapper();
 
     //Then
-    mockMvc.perform(delete("/cities/1")
+    mockMvc.perform(delete("/cities/caad8f82-71db-11ea-bc55-0242ac130003")
         .accept(APPLICATION_JSON_UTF8)
         .content(mapper.writeValueAsString(inputCityDto))
         .contentType(APPLICATION_JSON_UTF8))

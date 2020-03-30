@@ -6,18 +6,18 @@
 
     <changeSet id="add_first_orders" author="db@nikita.poddubskiy">
         <insert tableName="orders">
-            <column name="order_id" value="1"/>
+            <column name="order_uuid" value="cfbc1e52-7281-11ea-bc55-0242ac130003"/>
             <column name="car_model" value="MAN"/>
-            <column name="order_city_from" value="2"/>
-            <column name="order_city_to" value="1"/>
-            <column name="order_user" value="2"/>
+            <column name="order_city_from" value="aa729b9c-727e-11ea-bc55-0242ac130003"/>
+            <column name="order_city_to" value="84cc6774-727e-11ea-bc55-0242ac130003"/>
+            <column name="order_user" value="23f7d33e-727e-11ea-bc55-0242ac130003"/>
         </insert>
         <insert tableName="orders">
-            <column name="order_id" value="2"/>
+            <column name="order_uuid" value="d41f5b62-7281-11ea-bc55-0242ac130003"/>
             <column name="car_model" value="VAN"/>
-            <column name="order_city_from" value="1"/>
-            <column name="order_city_to" value="2"/>
-            <column name="order_user" value="1"/>
+            <column name="order_city_from" value="84cc6774-727e-11ea-bc55-0242ac130003"/>
+            <column name="order_city_to" value="aa729b9c-727e-11ea-bc55-0242ac130003"/>
+            <column name="order_user" value="fa351b88-727d-11ea-bc55-0242ac130003"/>
         </insert>
     </changeSet>
 

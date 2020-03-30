@@ -2,12 +2,11 @@ package com.epam.rd.edu.petproject.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -21,12 +20,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "cars")
-public class Car extends AbstractEntity<Integer> {
+public class Car extends AbstractEntity<UUID> {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "car_id")
-  private Integer id;
+  @Column(name = "car_uuid", length = 36)
+  private UUID uuid = UUID.randomUUID();
   @Column(name = "model")
   @Enumerated(EnumType.STRING)
   private CarModel model;
@@ -39,12 +37,8 @@ public class Car extends AbstractEntity<Integer> {
   @Column(name = "fully_Functional")
   private boolean fully_Functional;
 
-  public enum CarModel implements Serializable {
-    MAN, VAN, VOLVO, MERCEDES
-  }
-
   public Car(Car car) {
-    this.id = car.id;
+    this.uuid = car.uuid;
     this.model = car.model;
     this.carNumber = car.carNumber;
     this.carTechnicalPassport = car.carTechnicalPassport;
@@ -55,6 +49,10 @@ public class Car extends AbstractEntity<Integer> {
   @Override
   public Car clone() {
     return new Car(this);
+  }
+
+  public enum CarModel implements Serializable {
+    MAN, VAN, VOLVO, MERCEDES
   }
 
 }

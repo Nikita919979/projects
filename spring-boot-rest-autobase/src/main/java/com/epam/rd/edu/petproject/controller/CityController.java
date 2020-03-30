@@ -4,6 +4,7 @@ import com.epam.rd.edu.petproject.dto.CityDto;
 import com.epam.rd.edu.petproject.service.CityService;
 import com.epam.rd.edu.petproject.utils.aspect.Timed;
 import java.util.List;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,9 +25,9 @@ public class CityController {
   private CityService cityDtoService;
 
   @Timed
-  @GetMapping("/{id}")
-  public CityDto getCityDto(@PathVariable String id) {
-    return cityDtoService.read(Integer.parseInt(id));
+  @GetMapping("/{uuid}")
+  public CityDto getCityDto(@PathVariable String uuid) {
+    return cityDtoService.read(UUID.fromString(uuid));
   }
 
   @Timed
@@ -49,8 +50,8 @@ public class CityController {
   }
 
   @Timed
-  @DeleteMapping(value = "/{id}")
-  public void deleteCityDto(@PathVariable String id) {
-    cityDtoService.delete(Integer.parseInt(id));
+  @DeleteMapping(value = "/{uuid}")
+  public void deleteCityDto(@PathVariable String uuid) {
+    cityDtoService.delete(UUID.fromString(uuid));
   }
 }

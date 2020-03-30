@@ -5,6 +5,7 @@ import com.epam.rd.edu.petproject.service.UserService;
 import com.epam.rd.edu.petproject.utils.HashUtil;
 import com.epam.rd.edu.petproject.utils.aspect.Timed;
 import java.util.List;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,9 +26,9 @@ public class UserController {
   private UserService userDtoService;
 
   @Timed
-  @GetMapping("/{id}")
-  public UserDto getUserDto(@PathVariable String id) {
-    return userDtoService.read(Integer.parseInt(id));
+  @GetMapping("/{uuid}")
+  public UserDto getUserDto(@PathVariable String uuid) {
+    return userDtoService.read(UUID.fromString(uuid));
   }
 
   @Timed
@@ -51,8 +52,8 @@ public class UserController {
   }
 
   @Timed
-  @DeleteMapping(value = "/{id}")
-  public void deleteUserDto(@PathVariable String id) {
-    userDtoService.delete(Integer.parseInt(id));
+  @DeleteMapping(value = "/{uuid}")
+  public void deleteUserDto(@PathVariable String uuid) {
+    userDtoService.delete(UUID.fromString(uuid));
   }
 }

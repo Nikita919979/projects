@@ -4,21 +4,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 public final class HashUtil implements PasswordEncoder {
 
-  @Override
-  public boolean upgradeEncoding(String encodedPassword) {
-    return false;
-  }
-
-  @Override
-  public String encode(CharSequence rawPassword) {
-    return messageToHash(rawPassword.toString());
-  }
-
-  @Override
-  public boolean matches(CharSequence rawPassword, String encodedPassword) {
-    return encodedPassword.equals(messageToHash(rawPassword.toString()));
-  }
-
   public static String messageToHash(String msg) {
     byte[] byteMessageArray = msg.getBytes();
     StringBuilder binaryString = new StringBuilder();
@@ -154,5 +139,20 @@ public final class HashUtil implements PasswordEncoder {
 
   private static Integer rotateRight(int n, int d) {
     return (n >>> d) | (n << (32 - d));
+  }
+
+  @Override
+  public boolean upgradeEncoding(String encodedPassword) {
+    return false;
+  }
+
+  @Override
+  public String encode(CharSequence rawPassword) {
+    return messageToHash(rawPassword.toString());
+  }
+
+  @Override
+  public boolean matches(CharSequence rawPassword, String encodedPassword) {
+    return encodedPassword.equals(messageToHash(rawPassword.toString()));
   }
 }

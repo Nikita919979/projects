@@ -4,6 +4,7 @@ import com.epam.rd.edu.petproject.dto.CarDto;
 import com.epam.rd.edu.petproject.service.CarService;
 import com.epam.rd.edu.petproject.utils.aspect.Timed;
 import java.util.List;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,9 +25,9 @@ public class CarController {
   private CarService carDtoService;
 
   @Timed
-  @GetMapping("/{id}")
-  public CarDto getCarDto(@PathVariable String id) {
-    return carDtoService.read(Integer.parseInt(id));
+  @GetMapping("/{uuid}")
+  public CarDto getCarDto(@PathVariable String uuid) {
+    return carDtoService.read(UUID.fromString(uuid));
   }
 
   @Timed
@@ -49,8 +50,8 @@ public class CarController {
   }
 
   @Timed
-  @DeleteMapping(value = "/{id}")
-  public void deleteCarDto(@PathVariable String id) {
-    carDtoService.delete(Integer.parseInt(id));
+  @DeleteMapping(value = "/{uuid}")
+  public void deleteCarDto(@PathVariable String uuid) {
+    carDtoService.delete(UUID.fromString(uuid));
   }
 }

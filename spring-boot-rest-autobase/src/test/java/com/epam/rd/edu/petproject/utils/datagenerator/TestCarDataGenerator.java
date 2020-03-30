@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lombok.experimental.UtilityClass;
@@ -26,7 +27,7 @@ public class TestCarDataGenerator {
 
   public CarDto generateCarDto(int counter, Car.CarModel model) {
     return CarDto.builder()
-        .id(counter)
+        .uuid(UUID.randomUUID())
         .model(model)
         .carNumber("testCarNumber" + counter)
         .carTechnicalPassport("testCarTechnicalPassport" + counter)
@@ -37,7 +38,7 @@ public class TestCarDataGenerator {
 
   public CarDto generateCarDtoWithRandomModel(int counter) {
     return CarDto.builder()
-        .id(counter)
+        .uuid(UUID.randomUUID())
         .model(Arrays.stream(CarModel.values()).findAny().get())
         .carNumber("testCarNumber" + counter)
         .carTechnicalPassport("testCarTechnicalPassport" + counter)

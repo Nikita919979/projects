@@ -11,11 +11,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.epam.rd.edu.petproject.SpringAutobaseProjectTest;
 import com.epam.rd.edu.petproject.dto.CarDto;
-import com.epam.rd.edu.petproject.model.Car;
 import com.epam.rd.edu.petproject.model.Car.CarModel;
 import com.epam.rd.edu.petproject.utils.datagenerator.TestCarDataGenerator;
 import java.nio.charset.StandardCharsets;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 import org.junit.Test;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -39,7 +39,7 @@ public class CarControllerIT extends SpringAutobaseProjectTest {
         .contentType(APPLICATION_JSON_UTF8)
         .content(objectMapper.writeValueAsString(carDto)))
         .andExpect(status().isCreated())
-        .andExpect(jsonPath("$.id", is(carDto.getId())))
+        .andExpect(jsonPath("$.uuid", is(carDto.getUuid())))
         .andExpect(jsonPath("$.model", is(carDto.getModel().name())))
         .andExpect(jsonPath("$.carNumber", is(carDto.getCarNumber())))
         .andExpect(jsonPath("$.carTechnicalPassport",
@@ -50,9 +50,9 @@ public class CarControllerIT extends SpringAutobaseProjectTest {
         .andExpect(
             jsonPath("$.fully_Functional", is(carDto.isFully_Functional())));
 
-    mockMvc.perform(get("/cars/4")
+    mockMvc.perform(get("/cars/" + carDto.getUuid().toString())
         .contentType(APPLICATION_JSON_UTF8))
-        .andExpect(jsonPath("$.id", is(carDto.getId())))
+        .andExpect(jsonPath("$.uuid", is(carDto.getUuid())))
         .andExpect(jsonPath("$.model", is(carDto.getModel().name())))
         .andExpect(jsonPath("$.carNumber", is(carDto.getCarNumber())))
         .andExpect(jsonPath("$.carTechnicalPassport",
@@ -77,9 +77,9 @@ public class CarControllerIT extends SpringAutobaseProjectTest {
         .content(objectMapper.writeValueAsString(carDto)))
         .andExpect(status().isOk());
 
-    mockMvc.perform(get("/cars/1")
+    mockMvc.perform(get("/cars/8e45a958-71db-11ea-bc55-0242ac130003)")
         .contentType(APPLICATION_JSON_UTF8))
-        .andExpect(jsonPath("$.id", is(carDto.getId())))
+        .andExpect(jsonPath("$.uuid", is(carDto.getUuid())))
         .andExpect(jsonPath("$.model", is(carDto.getModel().name())))
         .andExpect(jsonPath("$.carNumber", is(carDto.getCarNumber())))
         .andExpect(jsonPath("$.carTechnicalPassport",
@@ -96,10 +96,10 @@ public class CarControllerIT extends SpringAutobaseProjectTest {
   @WithMockUser(username = "admin", password = "admin1", roles = {"ADMIN"})
   public void shouldDeleteCarThroughAllLayers() throws Exception {
     //Then
-    mockMvc.perform(delete("/cars/3"))
+    mockMvc.perform(delete("/cars/b61cda14-71db-11ea-bc55-0242ac130003"))
         .andExpect(status().isOk());
 
-    mockMvc.perform(get("/cars/3"))
+    mockMvc.perform(get("/cars/b61cda14-71db-11ea-bc55-0242ac130003"))
         .andExpect(status().isNotFound());
   }
 
@@ -107,9 +107,9 @@ public class CarControllerIT extends SpringAutobaseProjectTest {
   @WithMockUser(username = "admin", password = "admin1", roles = {"ADMIN"})
   public void shouldGetCarThroughAllLayers() throws Exception {
     //Then
-    mockMvc.perform(get("/cars/3"))
+    mockMvc.perform(get("/cars/b61cda14-71db-11ea-bc55-0242ac130003"))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.id", is(3)))
+        .andExpect(jsonPath("$.uuid", is("8e45a958-71db-11ea-bc55-0242ac130003")))
         .andExpect(jsonPath("$.model", is(CarModel.MAN)))
         .andExpect(jsonPath("$.carNumber", is("testCarNumber1")))
         .andExpect(jsonPath("$.carTechnicalPassport", is("testCarTechnicalPassport1")))
@@ -124,8 +124,9 @@ public class CarControllerIT extends SpringAutobaseProjectTest {
     mockMvc.perform(get("/cars"))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$", hasSize(3)))
-        .andExpect(jsonPath("$[0].id", is(1)))
-        .andExpect(jsonPath("$[1].id", is(2)))
-        .andExpect(jsonPath("$[2].id", is(3)));
+        .andExpect(
+            jsonPath("$[0].uuid", is(UUID.fromString("8e45a958-71db-11ea-bc55-0242ac130003"))))
+        .andExpect(jsonPath("$[1].uuid", is(2)))
+        .andExpect(jsonPath("$[2].uuid", is(3)));
   }
 }

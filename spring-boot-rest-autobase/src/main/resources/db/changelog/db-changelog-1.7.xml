@@ -6,148 +6,148 @@
 
     <changeSet id="add_first_transits" author="db@nikita.poddubskiy">
         <insert tableName="transits">
-            <column name="transit_id" value="1"/>
+            <column name="transit_uuid" value="3d497af6-7281-11ea-bc55-0242ac130003"/>
             <column name="status" value="OPENED"/>
-            <column name="transit_city_from" value="5"/>
-            <column name="transit_city_to" value="3"/>
-            <column name="transit_car" value="5"/>
-            <column name="transit_user" value="2"/>
-            <column name="transit_driver" value="3"/>
+            <column name="transit_city_from" value="03dc135c-727f-11ea-bc55-0242ac130003"/>
+            <column name="transit_city_to" value="c9cd6f08-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_car" value="7c827aa2-7280-11ea-bc55-0242ac130003"/>
+            <column name="transit_user" value="23f7d33e-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_driver" value="48b082de-727e-11ea-bc55-0242ac130003"/>
         </insert>
         <insert tableName="transits">
-            <column name="transit_id" value="2"/>
+            <column name="transit_uuid" value="43fe04f2-7281-11ea-bc55-0242ac130003"/>
             <column name="status" value="OPENED"/>
-            <column name="transit_city_from" value="1"/>
-            <column name="transit_city_to" value="2"/>
-            <column name="transit_car" value="3"/>
-            <column name="transit_user" value="2"/>
-            <column name="transit_driver" value="4"/>
+            <column name="transit_city_from" value="84cc6774-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_city_to" value="aa729b9c-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_car" value="49003f8e-7280-11ea-bc55-0242ac130003"/>
+            <column name="transit_user" value="23f7d33e-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_driver" value="6e6aac8e-727e-11ea-bc55-0242ac130003"/>
         </insert>
         <insert tableName="transits">
-            <column name="transit_id" value="3"/>
+            <column name="transit_uuid" value="4878c0da-7281-11ea-bc55-0242ac130003"/>
             <column name="status" value="OPENED"/>
-            <column name="transit_city_from" value="2"/>
-            <column name="transit_city_to" value="8"/>
-            <column name="transit_car" value="5"/>
-            <column name="transit_user" value="2"/>
-            <column name="transit_driver" value="4"/>
+            <column name="transit_city_from" value="aa729b9c-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_city_to" value="03dc135c-727f-11ea-bc55-0242ac130003"/>
+            <column name="transit_car" value="7c827aa2-7280-11ea-bc55-0242ac130003"/>
+            <column name="transit_user" value="23f7d33e-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_driver" value="6e6aac8e-727e-11ea-bc55-0242ac130003"/>
         </insert>
         <insert tableName="transits">
-            <column name="transit_id" value="4"/>
+            <column name="transit_uuid" value="4cf807ec-7281-11ea-bc55-0242ac130003"/>
             <column name="status" value="OPENED"/>
-            <column name="transit_city_from" value="3"/>
-            <column name="transit_city_to" value="7"/>
-            <column name="transit_car" value="1"/>
-            <column name="transit_user" value="2"/>
-            <column name="transit_driver" value="3"/>
+            <column name="transit_city_from" value="c9cd6f08-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_city_to" value="75da1fee-727f-11ea-bc55-0242ac130003"/>
+            <column name="transit_car" value="16b08d9a-7280-11ea-bc55-0242ac130003"/>
+            <column name="transit_user" value="23f7d33e-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_driver" value="48b082de-727e-11ea-bc55-0242ac130003"/>
         </insert>
         <insert tableName="transits">
-            <column name="transit_id" value="5"/>
+            <column name="transit_uuid" value="50a7b7de-7281-11ea-bc55-0242ac130003"/>
             <column name="status" value="OPENED"/>
-            <column name="transit_city_from" value="3"/>
-            <column name="transit_city_to" value="5"/>
-            <column name="transit_car" value="8"/>
-            <column name="transit_user" value="2"/>
-            <column name="transit_driver" value="4"/>
+            <column name="transit_city_from" value="c9cd6f08-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_city_to" value="03dc135c-727f-11ea-bc55-0242ac130003"/>
+            <column name="transit_car" value="f3b81884-7280-11ea-bc55-0242ac130003"/>
+            <column name="transit_user" value="23f7d33e-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_driver" value="6e6aac8e-727e-11ea-bc55-0242ac130003"/>
         </insert>
         <insert tableName="transits">
-            <column name="transit_id" value="6"/>
+            <column name="transit_uuid" value="54f1b16e-7281-11ea-bc55-0242ac130003"/>
             <column name="status" value="OPENED"/>
-            <column name="transit_city_from" value="4"/>
-            <column name="transit_city_to" value="5"/>
-            <column name="transit_car" value="1"/>
-            <column name="transit_user" value="2"/>
-            <column name="transit_driver" value="4"/>
+            <column name="transit_city_from" value="f48aeebe-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_city_to" value="03dc135c-727f-11ea-bc55-0242ac130003"/>
+            <column name="transit_car" value="16b08d9a-7280-11ea-bc55-0242ac130003"/>
+            <column name="transit_user" value="23f7d33e-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_driver" value="6e6aac8e-727e-11ea-bc55-0242ac130003"/>
         </insert>
         <insert tableName="transits">
-            <column name="transit_id" value="7"/>
+            <column name="transit_uuid" value="5a540256-7281-11ea-bc55-0242ac130003"/>
             <column name="status" value="OPENED"/>
-            <column name="transit_city_from" value="7"/>
-            <column name="transit_city_to" value="1"/>
-            <column name="transit_car" value="6"/>
-            <column name="transit_user" value="2"/>
-            <column name="transit_driver" value="3"/>
+            <column name="transit_city_from" value="75da1fee-727f-11ea-bc55-0242ac130003"/>
+            <column name="transit_city_to" value="84cc6774-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_car" value="87a888e0-7280-11ea-bc55-0242ac130003"/>
+            <column name="transit_user" value="23f7d33e-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_driver" value="48b082de-727e-11ea-bc55-0242ac130003"/>
         </insert>
         <insert tableName="transits">
-            <column name="transit_id" value="8"/>
+            <column name="transit_uuid" value="756ad4ca-7281-11ea-bc55-0242ac130003"/>
             <column name="status" value="INPROGRESS"/>
-            <column name="transit_city_from" value="7"/>
-            <column name="transit_city_to" value="2"/>
-            <column name="transit_car" value="4"/>
-            <column name="transit_user" value="2"/>
-            <column name="transit_driver" value="4"/>
+            <column name="transit_city_from" value="75da1fee-727f-11ea-bc55-0242ac130003"/>
+            <column name="transit_city_to" value="aa729b9c-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_car" value="576ede36-7280-11ea-bc55-0242ac130003"/>
+            <column name="transit_user" value="23f7d33e-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_driver" value="6e6aac8e-727e-11ea-bc55-0242ac130003"/>
         </insert>
         <insert tableName="transits">
-            <column name="transit_id" value="9"/>
+            <column name="transit_uuid" value="5f9e7444-7281-11ea-bc55-0242ac130003"/>
             <column name="status" value="INPROGRESS"/>
-            <column name="transit_city_from" value="6"/>
-            <column name="transit_city_to" value="3"/>
-            <column name="transit_car" value="4"/>
-            <column name="transit_user" value="2"/>
-            <column name="transit_driver" value="3"/>
+            <column name="transit_city_from" value="69d489d2-727f-11ea-bc55-0242ac130003"/>
+            <column name="transit_city_to" value="c9cd6f08-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_car" value="576ede36-7280-11ea-bc55-0242ac130003"/>
+            <column name="transit_user" value="23f7d33e-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_driver" value="48b082de-727e-11ea-bc55-0242ac130003"/>
         </insert>
         <insert tableName="transits">
-            <column name="transit_id" value="10"/>
+            <column name="transit_uuid" value="7a84648a-7281-11ea-bc55-0242ac130003"/>
             <column name="status" value="INPROGRESS"/>
-            <column name="transit_city_from" value="3"/>
-            <column name="transit_city_to" value="5"/>
-            <column name="transit_car" value="7"/>
-            <column name="transit_user" value="2"/>
-            <column name="transit_driver" value="4"/>
+            <column name="transit_city_from" value="c9cd6f08-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_city_to" value="03dc135c-727f-11ea-bc55-0242ac130003"/>
+            <column name="transit_car" value="916d2976-7280-11ea-bc55-0242ac130003"/>
+            <column name="transit_user" value="23f7d33e-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_driver" value="6e6aac8e-727e-11ea-bc55-0242ac130003"/>
         </insert>
         <insert tableName="transits">
-            <column name="transit_id" value="11"/>
+            <column name="transit_uuid" value="7fb5dd6c-7281-11ea-bc55-0242ac130003"/>
             <column name="status" value="INPROGRESS"/>
-            <column name="transit_city_from" value="1"/>
-            <column name="transit_city_to" value="7"/>
-            <column name="transit_car" value="7"/>
-            <column name="transit_user" value="2"/>
-            <column name="transit_driver" value="3"/>
+            <column name="transit_city_from" value="84cc6774-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_city_to" value="75da1fee-727f-11ea-bc55-0242ac130003"/>
+            <column name="transit_car" value="916d2976-7280-11ea-bc55-0242ac130003"/>
+            <column name="transit_user" value="23f7d33e-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_driver" value="48b082de-727e-11ea-bc55-0242ac130003"/>
         </insert>
         <insert tableName="transits">
-            <column name="transit_id" value="12"/>
+            <column name="transit_uuid" value="845e5b8c-7281-11ea-bc55-0242ac130003"/>
             <column name="status" value="CANCELED"/>
-            <column name="transit_city_from" value="5"/>
-            <column name="transit_city_to" value="4"/>
-            <column name="transit_car" value="2"/>
-            <column name="transit_user" value="2"/>
-            <column name="transit_driver" value="3"/>
+            <column name="transit_city_from" value="03dc135c-727f-11ea-bc55-0242ac130003"/>
+            <column name="transit_city_to" value="f48aeebe-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_car" value="278917ae-7280-11ea-bc55-0242ac130003"/>
+            <column name="transit_user" value="23f7d33e-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_driver" value="48b082de-727e-11ea-bc55-0242ac130003"/>
         </insert>
         <insert tableName="transits">
-            <column name="transit_id" value="13"/>
+            <column name="transit_uuid" value="94f81528-7281-11ea-bc55-0242ac130003"/>
             <column name="status" value="CANCELED"/>
-            <column name="transit_city_from" value="4"/>
-            <column name="transit_city_to" value="6"/>
-            <column name="transit_car" value="2"/>
-            <column name="transit_user" value="2"/>
-            <column name="transit_driver" value="4"/>
+            <column name="transit_city_from" value="f48aeebe-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_city_to" value="69d489d2-727f-11ea-bc55-0242ac130003"/>
+            <column name="transit_car" value="278917ae-7280-11ea-bc55-0242ac130003"/>
+            <column name="transit_user" value="23f7d33e-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_driver" value="6e6aac8e-727e-11ea-bc55-0242ac130003"/>
         </insert>
         <insert tableName="transits">
-            <column name="transit_id" value="14"/>
+            <column name="transit_uuid" value="9869c6ca-7281-11ea-bc55-0242ac130003"/>
             <column name="status" value="CANCELED"/>
-            <column name="transit_city_from" value="3"/>
-            <column name="transit_city_to" value="5"/>
-            <column name="transit_car" value="1"/>
-            <column name="transit_user" value="2"/>
-            <column name="transit_driver" value="3"/>
+            <column name="transit_city_from" value="c9cd6f08-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_city_to" value="03dc135c-727f-11ea-bc55-0242ac130003"/>
+            <column name="transit_car" value="16b08d9a-7280-11ea-bc55-0242ac130003"/>
+            <column name="transit_user" value="23f7d33e-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_driver" value="48b082de-727e-11ea-bc55-0242ac130003"/>
         </insert>
         <insert tableName="transits">
-            <column name="transit_id" value="15"/>
+            <column name="transit_uuid" value="9ca4451c-7281-11ea-bc55-0242ac130003"/>
             <column name="status" value="CLOSED"/>
-            <column name="transit_city_from" value="8"/>
-            <column name="transit_city_to" value="5"/>
-            <column name="transit_car" value="8"/>
-            <column name="transit_user" value="2"/>
-            <column name="transit_driver" value="4"/>
+            <column name="transit_city_from" value="69d489d2-727f-11ea-bc55-0242ac130003"/>
+            <column name="transit_city_to" value="03dc135c-727f-11ea-bc55-0242ac130003"/>
+            <column name="transit_car" value="f3b81884-7280-11ea-bc55-0242ac130003"/>
+            <column name="transit_user" value="23f7d33e-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_driver" value="6e6aac8e-727e-11ea-bc55-0242ac130003"/>
         </insert>
         <insert tableName="transits">
-            <column name="transit_id" value="16"/>
+            <column name="transit_uuid" value="a1b7d956-7281-11ea-bc55-0242ac130003"/>
             <column name="status" value="CLOSED"/>
-            <column name="transit_city_from" value="2"/>
-            <column name="transit_city_to" value="1"/>
-            <column name="transit_car" value="5"/>
-            <column name="transit_user" value="2"/>
-            <column name="transit_driver" value="4"/>
+            <column name="transit_city_from" value="aa729b9c-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_city_to" value="84cc6774-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_car" value="7c827aa2-7280-11ea-bc55-0242ac130003"/>
+            <column name="transit_user" value="23f7d33e-727e-11ea-bc55-0242ac130003"/>
+            <column name="transit_driver" value="6e6aac8e-727e-11ea-bc55-0242ac130003"/>
         </insert>
     </changeSet>
 

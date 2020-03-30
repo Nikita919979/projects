@@ -7,7 +7,7 @@
     <changeSet id="add_first_users" author="db@nikita.poddubskiy">
         <!--pass: admin1-->
         <insert tableName="users">
-            <column name="user_id" value="1"/>
+            <column name="user_uuid" value="fa351b88-727d-11ea-bc55-0242ac130003"/>
             <column name="name" value="Nikita"/>
             <column name="family_name" value="Poddubskiy"/>
             <column name="username" value="admin"/>
@@ -17,7 +17,7 @@
         </insert>
         <!--pass: dispatcher1-->
         <insert tableName="users">
-            <column name="user_id" value="2"/>
+            <column name="user_uuid" value="23f7d33e-727e-11ea-bc55-0242ac130003"/>
             <column name="name" value="Mike"/>
             <column name="family_name" value="Petrov"/>
             <column name="username" value="dispatcher"/>
@@ -27,7 +27,7 @@
         </insert>
         <!--pass: driver1-->
         <insert tableName="users">
-            <column name="user_id" value="3"/>
+            <column name="user_uuid" value="48b082de-727e-11ea-bc55-0242ac130003"/>
             <column name="name" value="Ivan"/>
             <column name="family_name" value="Ivanov"/>
             <column name="username" value="driver"/>
@@ -37,7 +37,7 @@
         </insert>
         <!--pass: driver1-->
         <insert tableName="users">
-            <column name="user_id" value="4"/>
+            <column name="user_uuid" value="6e6aac8e-727e-11ea-bc55-0242ac130003"/>
             <column name="name" value="Ignat"/>
             <column name="family_name" value="Reznikov"/>
             <column name="username" value="driver2"/>

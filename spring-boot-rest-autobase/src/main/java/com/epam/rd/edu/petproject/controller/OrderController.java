@@ -4,6 +4,7 @@ import com.epam.rd.edu.petproject.dto.OrderDto;
 import com.epam.rd.edu.petproject.service.OrderService;
 import com.epam.rd.edu.petproject.utils.aspect.Timed;
 import java.util.List;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,9 +25,9 @@ public class OrderController {
   private OrderService orderDtoService;
 
   @Timed
-  @GetMapping("/{id}")
-  public OrderDto getOrderDto(@PathVariable String id) {
-    return orderDtoService.read(Integer.parseInt(id));
+  @GetMapping("/{uuid}")
+  public OrderDto getOrderDto(@PathVariable String uuid) {
+    return orderDtoService.read(UUID.fromString(uuid));
   }
 
   @Timed
@@ -49,8 +50,8 @@ public class OrderController {
   }
 
   @Timed
-  @DeleteMapping(value = "/{id}")
-  public void deleteOrderDto(@PathVariable String id) {
-    orderDtoService.delete(Integer.parseInt(id));
+  @DeleteMapping(value = "/{uuid}")
+  public void deleteOrderDto(@PathVariable String uuid) {
+    orderDtoService.delete(UUID.fromString(uuid));
   }
 }

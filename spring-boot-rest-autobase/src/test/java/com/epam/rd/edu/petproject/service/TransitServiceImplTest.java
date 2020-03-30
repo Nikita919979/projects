@@ -8,7 +8,6 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import com.epam.rd.edu.petproject.converter.TransitConverter;
@@ -19,6 +18,7 @@ import com.epam.rd.edu.petproject.service.impl.TransitServiceImpl;
 import com.epam.rd.edu.petproject.utils.datagenerator.TestTransitDataGenerator;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import org.junit.Test;
 
 public class TransitServiceImplTest {
@@ -41,8 +41,8 @@ public class TransitServiceImplTest {
     TransitDto cityDtoVerify = sut.create(transitDto);
 
     //Then
-    verify(transitRepository, times(1)).save(transit);
-    assertThat(cityDtoVerify, hasProperty("id", is(transitDto.getId())));
+    verify(transitRepository).save(transit);
+    assertThat(cityDtoVerify, hasProperty("uuid", is(transitDto.getUuid())));
     assertThat(cityDtoVerify, hasProperty("status", is(transitDto.getStatus())));
     assertThat(cityDtoVerify, hasProperty("city_from", is(transitDto.getCity_from())));
     assertThat(cityDtoVerify, hasProperty("city_to", is(transitDto.getCity_to())));
@@ -57,14 +57,14 @@ public class TransitServiceImplTest {
     TransitDto transitDto = TestTransitDataGenerator.generateTransitDto(1);
     Transit transit = TestTransitDataGenerator.getTransit(transitDto);
     Optional<Transit> carOptional = Optional.of(transit);
-    doReturn(carOptional).when(transitRepository).findById(transit.getId());
+    doReturn(carOptional).when(transitRepository).findById(transit.getUuid());
 
     //When
-    sut.delete(1);
+    sut.delete(UUID.fromString("f1344876-71db-11ea-bc55-0242ac130003"));
 
     //Then
-    verify(transitRepository, times(1)).delete(transit);
-    verify(transitRepository, times(1)).findById(1);
+    verify(transitRepository).delete(transit);
+    verify(transitRepository).findById(UUID.fromString("f1344876-71db-11ea-bc55-0242ac130003"));
   }
 
   @Test
@@ -79,7 +79,7 @@ public class TransitServiceImplTest {
     sut.update(transitDto);
 
     //Then
-    verify(transitRepository, times(1)).save(transit);
+    verify(transitRepository).save(transit);
   }
 
   @Test
@@ -88,15 +88,16 @@ public class TransitServiceImplTest {
     TransitDto transitDto = TestTransitDataGenerator.generateTransitDto(1);
     Transit transit = TestTransitDataGenerator.getTransit(transitDto);
     Optional<Transit> carOptional = Optional.of(transit);
-    doReturn(carOptional).when(transitRepository).findById(1);
+    doReturn(carOptional).when(transitRepository)
+        .findById(UUID.fromString("f1344876-71db-11ea-bc55-0242ac130003"));
     doReturn(transitDto).when(transitConverter).toDto(transit);
 
     //When
-    TransitDto cityDtoVerify = sut.read(1);
+    TransitDto cityDtoVerify = sut.read(UUID.fromString("f1344876-71db-11ea-bc55-0242ac130003"));
 
     //Then
-    verify(transitRepository, times(1)).findById(1);
-    assertThat(cityDtoVerify, hasProperty("id", is(transitDto.getId())));
+    verify(transitRepository).findById(UUID.fromString("f1344876-71db-11ea-bc55-0242ac130003"));
+    assertThat(cityDtoVerify, hasProperty("uuid", is(transitDto.getUuid())));
     assertThat(cityDtoVerify, hasProperty("status", is(transitDto.getStatus())));
     assertThat(cityDtoVerify, hasProperty("city_from", is(transitDto.getCity_from())));
     assertThat(cityDtoVerify, hasProperty("city_to", is(transitDto.getCity_to())));
@@ -117,11 +118,11 @@ public class TransitServiceImplTest {
     List<TransitDto> cityDtoReturnList = sut.getAll();
 
     //Then
-    verify(transitRepository, times(1)).findAll();
+    verify(transitRepository).findAll();
     assertThat(cityDtoReturnList, not(is(empty())));
     transitDtoList.forEach(
         entity -> {
-          assertThat(cityDtoReturnList, hasItem((hasProperty("id", is(entity.getId())))));
+          assertThat(cityDtoReturnList, hasItem((hasProperty("uuid", is(entity.getUuid())))));
           assertThat(cityDtoReturnList,
               hasItem(hasProperty("status", is(entity.getStatus()))));
           assertThat(cityDtoReturnList,
@@ -150,7 +151,7 @@ public class TransitServiceImplTest {
     sut.updateAll(transitDtoList);
 
     //Then
-    verify(transitRepository, times(1)).saveAll(transitList);
+    verify(transitRepository).saveAll(transitList);
   }
 
   @Test
@@ -166,11 +167,11 @@ public class TransitServiceImplTest {
     List<TransitDto> cityDtoReturnList = sut.createAll(transitDtoList);
 
     //Then
-    verify(transitRepository, times(1)).saveAll(transitList);
+    verify(transitRepository).saveAll(transitList);
     assertThat(cityDtoReturnList, not(is(empty())));
     transitDtoList.forEach(
         entity -> {
-          assertThat(cityDtoReturnList, hasItem((hasProperty("id", is(entity.getId())))));
+          assertThat(cityDtoReturnList, hasItem((hasProperty("uuid", is(entity.getUuid())))));
           assertThat(cityDtoReturnList,
               hasItem(hasProperty("status", is(entity.getStatus()))));
           assertThat(cityDtoReturnList,

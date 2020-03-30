@@ -19,6 +19,7 @@ import com.epam.rd.edu.petproject.service.impl.OrderServiceImpl;
 import com.epam.rd.edu.petproject.utils.datagenerator.TestOrderDataGenerator;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import org.junit.Test;
 
 public class OrderServiceImplTest {
@@ -40,8 +41,8 @@ public class OrderServiceImplTest {
     OrderDto cityDtoVerify = sut.create(OrderDto);
 
     //Then
-    verify(orderRepository, times(1)).save(order);
-    assertThat(cityDtoVerify, hasProperty("id", is(OrderDto.getId())));
+    verify(orderRepository).save(order);
+    assertThat(cityDtoVerify, hasProperty("uuid", is(OrderDto.getUuid())));
     assertThat(cityDtoVerify, hasProperty("city_from", is(OrderDto.getCity_from())));
     assertThat(cityDtoVerify, hasProperty("city_to", is(OrderDto.getCity_to())));
     assertThat(cityDtoVerify, hasProperty("carModel", is(OrderDto.getCarModel())));
@@ -54,10 +55,10 @@ public class OrderServiceImplTest {
     OrderDto OrderDto = TestOrderDataGenerator.generateOrderDto(1);
     Order order = TestOrderDataGenerator.getOrder(OrderDto);
     Optional<Order> carOptional = Optional.of(order);
-    doReturn(carOptional).when(orderRepository).findById(order.getId());
+    doReturn(carOptional).when(orderRepository).findById(order.getUuid());
 
     //When
-    sut.delete(1);
+    sut.delete(UUID.fromString("e731d0fa-71db-11ea-bc55-0242ac130003"));
 
     //Then
     verify(orderRepository, times(1)).delete(order);
@@ -75,7 +76,7 @@ public class OrderServiceImplTest {
     sut.update(OrderDto);
 
     //Then
-    verify(orderRepository, times(1)).save(order);
+    verify(orderRepository).save(order);
   }
 
   @Test
@@ -84,15 +85,17 @@ public class OrderServiceImplTest {
     OrderDto OrderDto = TestOrderDataGenerator.generateOrderDto(1);
     Order order = TestOrderDataGenerator.getOrder(OrderDto);
     Optional<Order> carOptional = Optional.of(order);
-    doReturn(carOptional).when(orderRepository).findById(1);
+    doReturn(carOptional).when(orderRepository)
+        .findById(UUID.fromString("e731d0fa-71db-11ea-bc55-0242ac130003"));
     doReturn(OrderDto).when(orderConverter).toDto(order);
 
     //When
-    OrderDto cityDtoVerify = sut.read(1);
+    OrderDto cityDtoVerify = sut.read(UUID.fromString("e731d0fa-71db-11ea-bc55-0242ac130003"));
 
     //Then
-    verify(orderRepository, times(1)).findById(1);
-    assertThat(cityDtoVerify, hasProperty("id", is(OrderDto.getId())));
+    verify(orderRepository, times(1))
+        .findById(UUID.fromString("e731d0fa-71db-11ea-bc55-0242ac130003"));
+    assertThat(cityDtoVerify, hasProperty("uuid", is(OrderDto.getUuid())));
     assertThat(cityDtoVerify, hasProperty("city_from", is(OrderDto.getCity_from())));
     assertThat(cityDtoVerify, hasProperty("city_to", is(OrderDto.getCity_to())));
     assertThat(cityDtoVerify, hasProperty("carModel", is(OrderDto.getCarModel())));
@@ -111,11 +114,11 @@ public class OrderServiceImplTest {
     List<OrderDto> cityDtoReturnList = sut.getAll();
 
     //Then
-    verify(orderRepository, times(1)).findAll();
+    verify(orderRepository).findAll();
     assertThat(cityDtoReturnList, not(is(empty())));
     orderDtoList.forEach(
         entity -> {
-          assertThat(cityDtoReturnList, hasItem((hasProperty("id", is(entity.getId())))));
+          assertThat(cityDtoReturnList, hasItem((hasProperty("uuid", is(entity.getUuid())))));
           assertThat(cityDtoReturnList,
               hasItem(hasProperty("city_from", is(entity.getCity_from()))));
           assertThat(cityDtoReturnList,
@@ -140,7 +143,7 @@ public class OrderServiceImplTest {
     sut.updateAll(orderDtoList);
 
     //Then
-    verify(orderRepository, times(1)).saveAll(cityList);
+    verify(orderRepository).saveAll(cityList);
   }
 
   @Test
@@ -156,11 +159,11 @@ public class OrderServiceImplTest {
     List<OrderDto> cityDtoReturnList = sut.createAll(orderDtoList);
 
     //Then
-    verify(orderRepository, times(1)).saveAll(cityList);
+    verify(orderRepository).saveAll(cityList);
     assertThat(cityDtoReturnList, not(is(empty())));
     orderDtoList.forEach(
         entity -> {
-          assertThat(cityDtoReturnList, hasItem((hasProperty("id", is(entity.getId())))));
+          assertThat(cityDtoReturnList, hasItem((hasProperty("uuid", is(entity.getUuid())))));
           assertThat(cityDtoReturnList,
               hasItem(hasProperty("city_from", is(entity.getCity_from()))));
           assertThat(cityDtoReturnList,
