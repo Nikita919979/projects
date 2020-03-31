@@ -27,7 +27,7 @@ public class CarServiceImpl implements CarService {
 
   @Override
   public void delete(UUID key) {
-    carRepo.delete(carRepo.findById(key).get());
+    carRepo.deleteById(key);
   }
 
   @Override

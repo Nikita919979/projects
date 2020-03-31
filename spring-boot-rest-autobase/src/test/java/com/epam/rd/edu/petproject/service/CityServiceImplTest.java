@@ -50,14 +50,12 @@ public class CityServiceImplTest {
     //Given
     CityDto cityDto = TestCityDataGenerator.generateCityDto(1);
     City city = TestCityDataGenerator.getCity(cityDto);
-    Optional<City> carOptional = Optional.of(city);
-    doReturn(carOptional).when(cityRepository).findById(city.getUuid());
 
     //When
-    sut.delete(UUID.fromString("caad8f82-71db-11ea-bc55-0242ac130003"));
+    sut.delete(cityDto.getUuid());
 
     //Then
-    verify(cityRepository).delete(city);
+    verify(cityRepository).deleteById(city.getUuid());
   }
 
   @Test
@@ -80,8 +78,8 @@ public class CityServiceImplTest {
     //Given
     CityDto cityDto = TestCityDataGenerator.generateCityDto(1);
     City city = TestCityDataGenerator.getCity(cityDto);
-    Optional<City> carOptional = Optional.of(city);
-    doReturn(carOptional).when(cityRepository)
+    Optional<City> cityOptional = Optional.of(city);
+    doReturn(cityOptional).when(cityRepository)
         .findById(UUID.fromString("caad8f82-71db-11ea-bc55-0242ac130003"));
     doReturn(cityDto).when(cityConverter).toDto(city);
 

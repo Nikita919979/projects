@@ -27,7 +27,7 @@ public class OrderServiceImpl implements OrderService {
 
   @Override
   public void delete(UUID key) {
-    orderRepo.delete(orderRepo.findById(key).get());
+    orderRepo.deleteById(key);
   }
 
   @Override

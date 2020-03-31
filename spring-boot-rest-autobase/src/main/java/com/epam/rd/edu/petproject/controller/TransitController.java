@@ -50,7 +50,7 @@ public class TransitController {
   }
 
   @Timed
-  @DeleteMapping(value = "/{uuid}")
+  @DeleteMapping("/{uuid}")
   public void deleteTransitDto(@PathVariable String uuid) {
     transitDtoService.delete(UUID.fromString(uuid));
   }

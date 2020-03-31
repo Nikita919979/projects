@@ -39,7 +39,7 @@ public class CarControllerIT extends SpringAutobaseProjectTest {
         .contentType(APPLICATION_JSON_UTF8)
         .content(objectMapper.writeValueAsString(carDto)))
         .andExpect(status().isCreated())
-        .andExpect(jsonPath("$.uuid", is(carDto.getUuid())))
+        .andExpect(jsonPath("$.uuid", is(carDto.getUuid().toString())))
         .andExpect(jsonPath("$.model", is(carDto.getModel().name())))
         .andExpect(jsonPath("$.carNumber", is(carDto.getCarNumber())))
         .andExpect(jsonPath("$.carTechnicalPassport",
@@ -52,7 +52,7 @@ public class CarControllerIT extends SpringAutobaseProjectTest {
 
     mockMvc.perform(get("/cars/" + carDto.getUuid().toString())
         .contentType(APPLICATION_JSON_UTF8))
-        .andExpect(jsonPath("$.uuid", is(carDto.getUuid())))
+        .andExpect(jsonPath("$.uuid", is(carDto.getUuid().toString())))
         .andExpect(jsonPath("$.model", is(carDto.getModel().name())))
         .andExpect(jsonPath("$.carNumber", is(carDto.getCarNumber())))
         .andExpect(jsonPath("$.carTechnicalPassport",
@@ -70,16 +70,16 @@ public class CarControllerIT extends SpringAutobaseProjectTest {
   public void shouldUpdateCarThroughAllLayers() throws Exception {
     //Given
     CarDto carDto = TestCarDataGenerator.generateCarDtoWithRandomModel(1);
-
+    carDto.setUuid(UUID.fromString("8e45a958-71db-11ea-bc55-0242ac130003"));
     //Then
     mockMvc.perform(put("/cars")
         .contentType(APPLICATION_JSON_UTF8)
         .content(objectMapper.writeValueAsString(carDto)))
         .andExpect(status().isOk());
 
-    mockMvc.perform(get("/cars/8e45a958-71db-11ea-bc55-0242ac130003)")
+    mockMvc.perform(get("/cars/8e45a958-71db-11ea-bc55-0242ac130003")
         .contentType(APPLICATION_JSON_UTF8))
-        .andExpect(jsonPath("$.uuid", is(carDto.getUuid())))
+        .andExpect(jsonPath("$.uuid", is(carDto.getUuid().toString())))
         .andExpect(jsonPath("$.model", is(carDto.getModel().name())))
         .andExpect(jsonPath("$.carNumber", is(carDto.getCarNumber())))
         .andExpect(jsonPath("$.carTechnicalPassport",
@@ -96,10 +96,10 @@ public class CarControllerIT extends SpringAutobaseProjectTest {
   @WithMockUser(username = "admin", password = "admin1", roles = {"ADMIN"})
   public void shouldDeleteCarThroughAllLayers() throws Exception {
     //Then
-    mockMvc.perform(delete("/cars/b61cda14-71db-11ea-bc55-0242ac130003"))
+    mockMvc.perform(delete("/cars/ac194ac4-7290-11ea-bc55-0242ac130003"))
         .andExpect(status().isOk());
 
-    mockMvc.perform(get("/cars/b61cda14-71db-11ea-bc55-0242ac130003"))
+    mockMvc.perform(get("/cars/ac194ac4-7290-11ea-bc55-0242ac130003"))
         .andExpect(status().isNotFound());
   }
 
@@ -107,13 +107,13 @@ public class CarControllerIT extends SpringAutobaseProjectTest {
   @WithMockUser(username = "admin", password = "admin1", roles = {"ADMIN"})
   public void shouldGetCarThroughAllLayers() throws Exception {
     //Then
-    mockMvc.perform(get("/cars/b61cda14-71db-11ea-bc55-0242ac130003"))
+    mockMvc.perform(get("/cars/a84e93e6-71db-11ea-bc55-0242ac130003"))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.uuid", is("8e45a958-71db-11ea-bc55-0242ac130003")))
-        .andExpect(jsonPath("$.model", is(CarModel.MAN)))
-        .andExpect(jsonPath("$.carNumber", is("testCarNumber1")))
-        .andExpect(jsonPath("$.carTechnicalPassport", is("testCarTechnicalPassport1")))
-        .andExpect(jsonPath("$.releaseDate", is("23-03-2020")))
+        .andExpect(jsonPath("$.uuid", is("a84e93e6-71db-11ea-bc55-0242ac130003")))
+        .andExpect(jsonPath("$.model", is(CarModel.VOLVO.name())))
+        .andExpect(jsonPath("$.carNumber", is("CA128TD")))
+        .andExpect(jsonPath("$.carTechnicalPassport", is("6mrRr9D1")))
+        .andExpect(jsonPath("$.releaseDate", is("16-06-2014")))
         .andExpect(jsonPath("$.fully_Functional", is(true)));
   }
 
@@ -125,8 +125,10 @@ public class CarControllerIT extends SpringAutobaseProjectTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$", hasSize(3)))
         .andExpect(
-            jsonPath("$[0].uuid", is(UUID.fromString("8e45a958-71db-11ea-bc55-0242ac130003"))))
-        .andExpect(jsonPath("$[1].uuid", is(2)))
-        .andExpect(jsonPath("$[2].uuid", is(3)));
+            jsonPath("$[0].uuid", is("8e45a958-71db-11ea-bc55-0242ac130003")))
+        .andExpect(
+            jsonPath("$[1].uuid", is("a84e93e6-71db-11ea-bc55-0242ac130003")))
+        .andExpect(
+            jsonPath("$[2].uuid", is("ac194ac4-7290-11ea-bc55-0242ac130003")));
   }
 }

@@ -43,17 +43,20 @@ public class OrderControllerTest {
         .accept(APPLICATION_JSON_UTF8))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$", hasSize(2)))
-        .andExpect(jsonPath("$[0].uuid", is(inputOrderDtoList.get(0).getUuid())))
+        .andExpect(jsonPath("$[0].uuid", is(inputOrderDtoList.get(0).getUuid().toString())))
         .andExpect(
-            jsonPath("$[0].city_from.uuid", is(inputOrderDtoList.get(0).getCity_from().getUuid())))
+            jsonPath("$[0].city_from.uuid",
+                is(inputOrderDtoList.get(0).getCity_from().getUuid().toString())))
         .andExpect(
             jsonPath("$[0].city_from.name", is(inputOrderDtoList.get(0).getCity_from().getName())))
         .andExpect(
-            jsonPath("$[0].city_to.uuid", is(inputOrderDtoList.get(0).getCity_to().getUuid())))
+            jsonPath("$[0].city_to.uuid",
+                is(inputOrderDtoList.get(0).getCity_to().getUuid().toString())))
         .andExpect(
             jsonPath("$[0].city_to.name", is(inputOrderDtoList.get(0).getCity_to().getName())))
         .andExpect(jsonPath("$[0].carModel", is(inputOrderDtoList.get(0).getCarModel().name())))
-        .andExpect(jsonPath("$[0].user.uuid", is(inputOrderDtoList.get(0).getUser().getUuid())))
+        .andExpect(
+            jsonPath("$[0].user.uuid", is(inputOrderDtoList.get(0).getUser().getUuid().toString())))
         .andExpect(jsonPath("$[0].user.name", is(inputOrderDtoList.get(0).getUser().getName())))
         .andExpect(jsonPath("$[0].user.familyName",
             is(inputOrderDtoList.get(0).getUser().getFamilyName())))
@@ -63,17 +66,20 @@ public class OrderControllerTest {
         .andExpect(
             jsonPath("$[0].user.role", is(inputOrderDtoList.get(0).getUser().getRole().name())))
         .andExpect(jsonPath("$[0].user.email", is(inputOrderDtoList.get(0).getUser().getEmail())))
-        .andExpect(jsonPath("$[1].uuid", is(inputOrderDtoList.get(1).getUuid())))
+        .andExpect(jsonPath("$[1].uuid", is(inputOrderDtoList.get(1).getUuid().toString())))
         .andExpect(
-            jsonPath("$[1].city_from.uuid", is(inputOrderDtoList.get(1).getCity_from().getUuid())))
+            jsonPath("$[1].city_from.uuid",
+                is(inputOrderDtoList.get(1).getCity_from().getUuid().toString())))
         .andExpect(
             jsonPath("$[1].city_from.name", is(inputOrderDtoList.get(1).getCity_from().getName())))
         .andExpect(
-            jsonPath("$[1].city_to.uuid", is(inputOrderDtoList.get(1).getCity_to().getUuid())))
+            jsonPath("$[1].city_to.uuid",
+                is(inputOrderDtoList.get(1).getCity_to().getUuid().toString())))
         .andExpect(
             jsonPath("$[1].city_to.name", is(inputOrderDtoList.get(1).getCity_to().getName())))
         .andExpect(jsonPath("$[1].carModel", is(inputOrderDtoList.get(1).getCarModel().name())))
-        .andExpect(jsonPath("$[1].user.uuid", is(inputOrderDtoList.get(1).getUser().getUuid())))
+        .andExpect(
+            jsonPath("$[1].user.uuid", is(inputOrderDtoList.get(1).getUser().getUuid().toString())))
         .andExpect(jsonPath("$[1].user.name", is(inputOrderDtoList.get(1).getUser().getName())))
         .andExpect(jsonPath("$[1].user.familyName",
             is(inputOrderDtoList.get(1).getUser().getFamilyName())))
@@ -96,15 +102,15 @@ public class OrderControllerTest {
     mockMvc.perform(get("/orders/e731d0fa-71db-11ea-bc55-0242ac130003")
         .accept(APPLICATION_JSON_UTF8))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.uuid", is(inputOrderDto.getUuid())))
+        .andExpect(jsonPath("$.uuid", is(inputOrderDto.getUuid().toString())))
         .andExpect(
-            jsonPath("$.city_from.uuid", is(inputOrderDto.getCity_from().getUuid())))
+            jsonPath("$.city_from.uuid", is(inputOrderDto.getCity_from().getUuid().toString())))
         .andExpect(
             jsonPath("$.city_from.name", is(inputOrderDto.getCity_from().getName())))
-        .andExpect(jsonPath("$.city_to.uuid", is(inputOrderDto.getCity_to().getUuid())))
+        .andExpect(jsonPath("$.city_to.uuid", is(inputOrderDto.getCity_to().getUuid().toString())))
         .andExpect(jsonPath("$.city_to.name", is(inputOrderDto.getCity_to().getName())))
         .andExpect(jsonPath("$.carModel", is(inputOrderDto.getCarModel().name())))
-        .andExpect(jsonPath("$.user.uuid", is(inputOrderDto.getUser().getUuid())))
+        .andExpect(jsonPath("$.user.uuid", is(inputOrderDto.getUser().getUuid().toString())))
         .andExpect(jsonPath("$.user.name", is(inputOrderDto.getUser().getName())))
         .andExpect(jsonPath("$.user.familyName", is(inputOrderDto.getUser().getFamilyName())))
         .andExpect(jsonPath("$.user.login", is(inputOrderDto.getUser().getLogin())))
@@ -127,15 +133,15 @@ public class OrderControllerTest {
         .content(mapper.writeValueAsString(inputOrderDto))
         .contentType(APPLICATION_JSON_UTF8))
         .andExpect(status().isCreated())
-        .andExpect(jsonPath("$.uuid", is(inputOrderDto.getUuid())))
+        .andExpect(jsonPath("$.uuid", is(inputOrderDto.getUuid().toString())))
         .andExpect(
-            jsonPath("$.city_from.uuid", is(inputOrderDto.getCity_from().getUuid())))
+            jsonPath("$.city_from.uuid", is(inputOrderDto.getCity_from().getUuid().toString())))
         .andExpect(
             jsonPath("$.city_from.name", is(inputOrderDto.getCity_from().getName())))
-        .andExpect(jsonPath("$.city_to.uuid", is(inputOrderDto.getCity_to().getUuid())))
+        .andExpect(jsonPath("$.city_to.uuid", is(inputOrderDto.getCity_to().getUuid().toString())))
         .andExpect(jsonPath("$.city_to.name", is(inputOrderDto.getCity_to().getName())))
         .andExpect(jsonPath("$.carModel", is(inputOrderDto.getCarModel().name())))
-        .andExpect(jsonPath("$.user.uuid", is(inputOrderDto.getUser().getUuid())))
+        .andExpect(jsonPath("$.user.uuid", is(inputOrderDto.getUser().getUuid().toString())))
         .andExpect(jsonPath("$.user.name", is(inputOrderDto.getUser().getName())))
         .andExpect(jsonPath("$.user.familyName", is(inputOrderDto.getUser().getFamilyName())))
         .andExpect(jsonPath("$.user.login", is(inputOrderDto.getUser().getLogin())))

@@ -5,7 +5,7 @@ INSERT INTO cars (car_uuid, model, number, technical_passport, release_date, ful
 VALUES ('a84e93e6-71db-11ea-bc55-0242ac130003', 'VOLVO', 'CA128TD', '6mrRr9D1',
         '2014-06-16 00:00:00', 1);
 INSERT INTO cars (car_uuid, model, number, technical_passport, release_date, fully_Functional)
-VALUES ('b61cda14-71db-11ea-bc55-0242ac130003', 'MAN', 'testCarNumber1',
+VALUES ('ac194ac4-7290-11ea-bc55-0242ac130003', 'MAN', 'testCarNumber1',
         'testCarTechnicalPassport1', '2020-03-23 00:00:00', 1);
 INSERT INTO cities (city_uuid, name)
 VALUES ('caad8f82-71db-11ea-bc55-0242ac130003', 'Dnepr');
@@ -21,6 +21,10 @@ INSERT INTO users (user_uuid, name, family_name, username, password, role, email
 VALUES ('e3f1bb8a-71db-11ea-bc55-0242ac130003', 'Mike', 'Petrov', 'dispatcher',
         'a8c90fd571c6ceb25cbff41731c638be1392ead817a0c6745723756a5a48408a', 'DISPATCHER',
         'qwerty919979@gmail.com');
+INSERT INTO users (user_uuid, name, family_name, username, password, role, email)
+VALUES ('317e82f2-7295-11ea-bc55-0242ac130003', 'Jack', 'Pavlov', 'dispatcher1',
+        'a8c90fd571c6ceb25cbff41731c638be1392ead817a0c6745723756a5a48408a', 'DISPATCHER',
+        'Jack_Pavlov_1@gmail.com');
 INSERT INTO orders (order_uuid, car_model, order_city_from, order_city_to, order_user)
 VALUES ('e731d0fa-71db-11ea-bc55-0242ac130003', 'MAN', 'caad8f82-71db-11ea-bc55-0242ac130003',
         'cfd3fb4a-71db-11ea-bc55-0242ac130003', 'e3f1bb8a-71db-11ea-bc55-0242ac130003');

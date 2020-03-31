@@ -40,15 +40,15 @@ public class OrderControllerIT extends SpringAutobaseProjectTest {
         .contentType(APPLICATION_JSON_UTF8)
         .content(objectMapper.writeValueAsString(orderDto)))
         .andExpect(status().isCreated())
-        .andExpect(jsonPath("$.uuid", is(orderDto.getUuid())))
+        .andExpect(jsonPath("$.uuid", is(orderDto.getUuid().toString())))
         .andExpect(
-            jsonPath("$.city_from.uuid", is(orderDto.getCity_from().getUuid())))
+            jsonPath("$.city_from.uuid", is(orderDto.getCity_from().getUuid().toString())))
         .andExpect(
             jsonPath("$.city_from.name", is(orderDto.getCity_from().getName())))
-        .andExpect(jsonPath("$.city_to.uuid", is(orderDto.getCity_to().getUuid())))
+        .andExpect(jsonPath("$.city_to.uuid", is(orderDto.getCity_to().getUuid().toString())))
         .andExpect(jsonPath("$.city_to.name", is(orderDto.getCity_to().getName())))
         .andExpect(jsonPath("$.carModel", is(orderDto.getCarModel().name())))
-        .andExpect(jsonPath("$.user.uuid", is(orderDto.getUser().getUuid())))
+        .andExpect(jsonPath("$.user.uuid", is(orderDto.getUser().getUuid().toString())))
         .andExpect(jsonPath("$.user.name", is(orderDto.getUser().getName())))
         .andExpect(jsonPath("$.user.familyName", is(orderDto.getUser().getFamilyName())))
         .andExpect(jsonPath("$.user.login", is(orderDto.getUser().getLogin())))
@@ -58,15 +58,15 @@ public class OrderControllerIT extends SpringAutobaseProjectTest {
 
     mockMvc.perform(get("/orders/" + orderDto.getUuid().toString())
         .contentType(APPLICATION_JSON_UTF8))
-        .andExpect(jsonPath("$.uuid", is(orderDto.getUuid())))
+        .andExpect(jsonPath("$.uuid", is(orderDto.getUuid().toString())))
         .andExpect(
-            jsonPath("$.city_from.uuid", is(orderDto.getCity_from().getUuid())))
+            jsonPath("$.city_from.uuid", is(orderDto.getCity_from().getUuid().toString())))
         .andExpect(
             jsonPath("$.city_from.name", is(orderDto.getCity_from().getName())))
-        .andExpect(jsonPath("$.city_to.uuid", is(orderDto.getCity_to().getUuid())))
+        .andExpect(jsonPath("$.city_to.uuid", is(orderDto.getCity_to().getUuid().toString())))
         .andExpect(jsonPath("$.city_to.name", is(orderDto.getCity_to().getName())))
         .andExpect(jsonPath("$.carModel", is(orderDto.getCarModel().name())))
-        .andExpect(jsonPath("$.user.uuid", is(orderDto.getUser().getUuid())))
+        .andExpect(jsonPath("$.user.uuid", is(orderDto.getUser().getUuid().toString())))
         .andExpect(jsonPath("$.user.name", is(orderDto.getUser().getName())))
         .andExpect(jsonPath("$.user.familyName", is(orderDto.getUser().getFamilyName())))
         .andExpect(jsonPath("$.user.login", is(orderDto.getUser().getLogin())))
@@ -81,24 +81,24 @@ public class OrderControllerIT extends SpringAutobaseProjectTest {
   public void shouldUpdateOrderThroughAllLayers() throws Exception {
     //Given
     OrderDto orderDto = TestOrderDataGenerator.generateRealEntity(1);
-
+    orderDto.setUuid(UUID.fromString("e731d0fa-71db-11ea-bc55-0242ac130003"));
     //Then
     mockMvc.perform(put("/orders")
         .contentType(APPLICATION_JSON_UTF8)
         .content(objectMapper.writeValueAsString(orderDto)))
         .andExpect(status().isOk());
 
-    mockMvc.perform(get("/orders/e731d0fa-71db-11ea-bc55-0242ac130003")
+    mockMvc.perform(get("/orders/" + orderDto.getUuid())
         .contentType(APPLICATION_JSON_UTF8))
-        .andExpect(jsonPath("$.uuid", is(orderDto.getUuid())))
+        .andExpect(jsonPath("$.uuid", is(orderDto.getUuid().toString())))
         .andExpect(
-            jsonPath("$.city_from.uuid", is(orderDto.getCity_from().getUuid())))
+            jsonPath("$.city_from.uuid", is(orderDto.getCity_from().getUuid().toString())))
         .andExpect(
             jsonPath("$.city_from.name", is(orderDto.getCity_from().getName())))
-        .andExpect(jsonPath("$.city_to.uuid", is(orderDto.getCity_to().getUuid())))
+        .andExpect(jsonPath("$.city_to.uuid", is(orderDto.getCity_to().getUuid().toString())))
         .andExpect(jsonPath("$.city_to.name", is(orderDto.getCity_to().getName())))
         .andExpect(jsonPath("$.carModel", is(orderDto.getCarModel().name())))
-        .andExpect(jsonPath("$.user.uuid", is(orderDto.getUser().getUuid())))
+        .andExpect(jsonPath("$.user.uuid", is(orderDto.getUser().getUuid().toString())))
         .andExpect(jsonPath("$.user.name", is(orderDto.getUser().getName())))
         .andExpect(jsonPath("$.user.familyName", is(orderDto.getUser().getFamilyName())))
         .andExpect(jsonPath("$.user.login", is(orderDto.getUser().getLogin())))
@@ -125,20 +125,20 @@ public class OrderControllerIT extends SpringAutobaseProjectTest {
     //Then
     mockMvc.perform(get("/orders/ee117524-71db-11ea-bc55-0242ac130003"))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.uuid", is(3)))
+        .andExpect(jsonPath("$.uuid", is("ee117524-71db-11ea-bc55-0242ac130003")))
         .andExpect(
-            jsonPath("$.city_from.uuid", is(1)))
+            jsonPath("$.city_from.uuid", is("caad8f82-71db-11ea-bc55-0242ac130003")))
         .andExpect(
             jsonPath("$.city_from.name", is("Dnepr")))
-        .andExpect(jsonPath("$.city_to.uuid", is(2)))
+        .andExpect(jsonPath("$.city_to.uuid", is("cfd3fb4a-71db-11ea-bc55-0242ac130003")))
         .andExpect(jsonPath("$.city_to.name", is("Rome")))
         .andExpect(jsonPath("$.carModel", is("MAN")))
-        .andExpect(jsonPath("$.user.uuid", is(2)))
+        .andExpect(jsonPath("$.user.uuid", is("e3f1bb8a-71db-11ea-bc55-0242ac130003")))
         .andExpect(jsonPath("$.user.name", is("Mike")))
         .andExpect(jsonPath("$.user.familyName", is("Petrov")))
         .andExpect(jsonPath("$.user.login", is("dispatcher")))
         .andExpect(
-            jsonPath("$.user.role", is(Role.DISPATCHER)))
+            jsonPath("$.user.role", is(Role.DISPATCHER.name())))
         .andExpect(jsonPath("$.user.email", is("qwerty919979@gmail.com")));
   }
 
@@ -150,10 +150,10 @@ public class OrderControllerIT extends SpringAutobaseProjectTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$", hasSize(3)))
         .andExpect(
-            jsonPath("$[0].uuid", is(UUID.fromString("e731d0fa-71db-11ea-bc55-0242ac130003"))))
+            jsonPath("$[0].uuid", is("e731d0fa-71db-11ea-bc55-0242ac130003")))
         .andExpect(
-            jsonPath("$[1].uuid", is(UUID.fromString("eb3d9184-71db-11ea-bc55-0242ac130003"))))
+            jsonPath("$[1].uuid", is("eb3d9184-71db-11ea-bc55-0242ac130003")))
         .andExpect(
-            jsonPath("$[2].uuid", is(UUID.fromString("ee117524-71db-11ea-bc55-0242ac130003"))));
+            jsonPath("$[2].uuid", is("ee117524-71db-11ea-bc55-0242ac130003")));
   }
 }

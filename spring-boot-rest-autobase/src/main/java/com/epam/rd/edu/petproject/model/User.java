@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 @Data
 @NoArgsConstructor
@@ -22,6 +23,7 @@ import lombok.NoArgsConstructor;
 public class User extends AbstractEntity<UUID> {
 
   @Id
+  @Type(type="uuid-char")
   @Column(name = "user_uuid", length = 36)
   private UUID uuid = UUID.randomUUID();
   @Column(name = "name")

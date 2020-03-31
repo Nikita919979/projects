@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS transits;
 
 create table users
 (
-    user_uuid   VARCHAR(36)
+    user_uuid   varchar(36)
         primary key,
     name        varchar(60)  not null,
     family_name varchar(60)  not null,
@@ -18,7 +18,7 @@ create table users
 
 create table cars
 (
-    car_uuid           VARCHAR(36)
+    car_uuid           varchar(36)
         primary key,
     model              varchar(60) not null,
     number             varchar(60) not null,
@@ -29,45 +29,45 @@ create table cars
 
 create table cities
 (
-    city_uuid bigint auto_increment
+    city_uuid varchar(36)
         primary key,
     name      varchar(60) not null
 );
 
 create table orders
 (
-    order_uuid      VARCHAR(36)
+    order_uuid      varchar(36)
         primary key,
     car_model       varchar(60) not null,
-    order_city_from bigint      not null,
-    order_city_to   bigint      not null,
-    order_user      bigint      not null,
+    order_city_from varchar(36) not null,
+    order_city_to   varchar(36) not null,
+    order_user      varchar(36) not null,
     constraint fk_order_city_from
-        foreign key (order_city_from) references cities (city_id),
+        foreign key (order_city_from) references cities (city_uuid),
     constraint fk_order_city_to
-        foreign key (order_city_to) references cities (city_id),
+        foreign key (order_city_to) references cities (city_uuid),
     constraint fk_order_user
-        foreign key (order_user) references users (user_id)
+        foreign key (order_user) references users (user_uuid)
 );
 
 create table transits
 (
-    transit_uuid      VARCHAR(36)
+    transit_uuid      varchar(36)
         primary key,
     status            varchar(60) not null,
-    transit_city_from bigint      not null,
-    transit_city_to   bigint      not null,
-    transit_car       bigint      not null,
-    transit_user      bigint      not null,
-    transit_driver    bigint      not null,
+    transit_city_from varchar(36) not null,
+    transit_city_to   varchar(36) not null,
+    transit_car       varchar(36) not null,
+    transit_user      varchar(36) not null,
+    transit_driver    varchar(36) not null,
     constraint fk_transit_car
-        foreign key (transit_car) references cars (car_id),
+        foreign key (transit_car) references cars (car_uuid),
     constraint fk_transit_city_from
-        foreign key (transit_city_from) references cities (city_id),
+        foreign key (transit_city_from) references cities (city_uuid),
     constraint fk_transit_city_to
-        foreign key (transit_city_to) references cities (city_id),
+        foreign key (transit_city_to) references cities (city_uuid),
     constraint fk_transit_driver
-        foreign key (transit_driver) references users (user_id),
+        foreign key (transit_driver) references users (user_uuid),
     constraint fk_transit_user
-        foreign key (transit_user) references users (user_id)
+        foreign key (transit_user) references users (user_uuid)
 );

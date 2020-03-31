@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 @Data
 @NoArgsConstructor
@@ -24,7 +25,8 @@ import lombok.NoArgsConstructor;
 public class Transit extends AbstractEntity<UUID> {
 
   @Id
-  @Column(name = "car_uuid", length = 36)
+  @Type(type="uuid-char")
+  @Column(name = "transit_uuid", length = 36)
   private UUID uuid = UUID.randomUUID();
   @Column(name = "status")
   @Enumerated(EnumType.STRING)

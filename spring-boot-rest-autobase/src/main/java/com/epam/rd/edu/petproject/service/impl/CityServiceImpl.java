@@ -27,7 +27,7 @@ public class CityServiceImpl implements CityService {
 
   @Override
   public void delete(UUID key) {
-    cityRepo.delete(cityRepo.findById(key).get());
+    cityRepo.deleteById(key);
   }
 
   @Override

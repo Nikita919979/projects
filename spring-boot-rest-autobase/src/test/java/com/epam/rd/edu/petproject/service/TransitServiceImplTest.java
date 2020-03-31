@@ -52,19 +52,16 @@ public class TransitServiceImplTest {
   }
 
   @Test
-  public void deleteShouldCallAllMethods() {
+  public void shouldDeleteTransit() {
     //Given
     TransitDto transitDto = TestTransitDataGenerator.generateTransitDto(1);
     Transit transit = TestTransitDataGenerator.getTransit(transitDto);
-    Optional<Transit> carOptional = Optional.of(transit);
-    doReturn(carOptional).when(transitRepository).findById(transit.getUuid());
 
     //When
-    sut.delete(UUID.fromString("f1344876-71db-11ea-bc55-0242ac130003"));
+    sut.delete(transitDto.getUuid());
 
     //Then
-    verify(transitRepository).delete(transit);
-    verify(transitRepository).findById(UUID.fromString("f1344876-71db-11ea-bc55-0242ac130003"));
+    verify(transitRepository).deleteById(transit.getUuid());
   }
 
   @Test

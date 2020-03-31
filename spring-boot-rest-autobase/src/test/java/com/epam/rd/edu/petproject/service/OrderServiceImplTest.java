@@ -54,14 +54,12 @@ public class OrderServiceImplTest {
     //Given
     OrderDto OrderDto = TestOrderDataGenerator.generateOrderDto(1);
     Order order = TestOrderDataGenerator.getOrder(OrderDto);
-    Optional<Order> carOptional = Optional.of(order);
-    doReturn(carOptional).when(orderRepository).findById(order.getUuid());
 
     //When
-    sut.delete(UUID.fromString("e731d0fa-71db-11ea-bc55-0242ac130003"));
+    sut.delete(OrderDto.getUuid());
 
     //Then
-    verify(orderRepository, times(1)).delete(order);
+    verify(orderRepository).deleteById(order.getUuid());
   }
 
   @Test
@@ -93,7 +91,7 @@ public class OrderServiceImplTest {
     OrderDto cityDtoVerify = sut.read(UUID.fromString("e731d0fa-71db-11ea-bc55-0242ac130003"));
 
     //Then
-    verify(orderRepository, times(1))
+    verify(orderRepository)
         .findById(UUID.fromString("e731d0fa-71db-11ea-bc55-0242ac130003"));
     assertThat(cityDtoVerify, hasProperty("uuid", is(OrderDto.getUuid())));
     assertThat(cityDtoVerify, hasProperty("city_from", is(OrderDto.getCity_from())));

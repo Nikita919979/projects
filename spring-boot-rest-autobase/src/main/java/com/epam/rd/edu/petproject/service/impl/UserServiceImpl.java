@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public void delete(UUID key) {
-    userRepo.delete(userRepo.findById(key).get());
+    userRepo.deleteById(key);
   }
 
   @Override

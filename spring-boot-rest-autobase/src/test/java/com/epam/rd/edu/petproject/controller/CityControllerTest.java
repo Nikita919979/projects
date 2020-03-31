@@ -43,9 +43,9 @@ public class CityControllerTest {
         .accept(APPLICATION_JSON_UTF8))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$", hasSize(2)))
-        .andExpect(jsonPath("$[0].uuid", is(inputCityDtoList.get(0).getUuid())))
+        .andExpect(jsonPath("$[0].uuid", is(inputCityDtoList.get(0).getUuid().toString())))
         .andExpect(jsonPath("$[0].name", is(inputCityDtoList.get(0).getName())))
-        .andExpect(jsonPath("$[1].uuid", is(inputCityDtoList.get(1).getUuid())))
+        .andExpect(jsonPath("$[1].uuid", is(inputCityDtoList.get(1).getUuid().toString())))
         .andExpect(jsonPath("$[1].name", is(inputCityDtoList.get(1).getName())));
   }
 
@@ -60,7 +60,7 @@ public class CityControllerTest {
     mockMvc.perform(get("/cities/caad8f82-71db-11ea-bc55-0242ac130003")
         .accept(APPLICATION_JSON_UTF8))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.uuid", is(inputCityDto.getUuid())))
+        .andExpect(jsonPath("$.uuid", is(inputCityDto.getUuid().toString())))
         .andExpect(jsonPath("$.name", is(inputCityDto.getName())));
   }
 
@@ -77,7 +77,7 @@ public class CityControllerTest {
         .content(mapper.writeValueAsString(inputCityDto))
         .contentType(APPLICATION_JSON_UTF8))
         .andExpect(status().isCreated())
-        .andExpect(jsonPath("$.uuid", is(inputCityDto.getUuid())))
+        .andExpect(jsonPath("$.uuid", is(inputCityDto.getUuid().toString())))
         .andExpect(jsonPath("$.name", is(inputCityDto.getName())));
   }
 

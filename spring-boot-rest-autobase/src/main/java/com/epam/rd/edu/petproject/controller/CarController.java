@@ -50,7 +50,7 @@ public class CarController {
   }
 
   @Timed
-  @DeleteMapping(value = "/{uuid}")
+  @DeleteMapping("/{uuid}")
   public void deleteCarDto(@PathVariable String uuid) {
     carDtoService.delete(UUID.fromString(uuid));
   }

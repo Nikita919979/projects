@@ -50,7 +50,7 @@ public class OrderController {
   }
 
   @Timed
-  @DeleteMapping(value = "/{uuid}")
+  @DeleteMapping("/{uuid}")
   public void deleteOrderDto(@PathVariable String uuid) {
     orderDtoService.delete(UUID.fromString(uuid));
   }

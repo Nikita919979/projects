@@ -42,7 +42,7 @@ public class CarControllerTest {
         .accept(APPLICATION_JSON_UTF8))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$", hasSize(2)))
-        .andExpect(jsonPath("$[0].uuid", is(inputCarDtoList.get(0).getUuid())))
+        .andExpect(jsonPath("$[0].uuid", is(inputCarDtoList.get(0).getUuid().toString())))
         .andExpect(jsonPath("$[0].model", is(inputCarDtoList.get(0).getModel().name())))
         .andExpect(jsonPath("$[0].carNumber", is(inputCarDtoList.get(0).getCarNumber())))
         .andExpect(jsonPath("$[0].carTechnicalPassport",
@@ -52,7 +52,7 @@ public class CarControllerTest {
                 DateTimeFormatter.ofPattern("dd-MM-yyyy")))))
         .andExpect(
             jsonPath("$[0].fully_Functional", is(inputCarDtoList.get(0).isFully_Functional())))
-        .andExpect(jsonPath("$[1].uuid", is(inputCarDtoList.get(1).getUuid())))
+        .andExpect(jsonPath("$[1].uuid", is(inputCarDtoList.get(1).getUuid().toString())))
         .andExpect(jsonPath("$[1].model", is(inputCarDtoList.get(1).getModel().name())))
         .andExpect(jsonPath("$[1].carNumber", is(inputCarDtoList.get(1).getCarNumber())))
         .andExpect(jsonPath("$[1].carTechnicalPassport",
@@ -75,7 +75,7 @@ public class CarControllerTest {
     mockMvc.perform(get("/cars/8e45a958-71db-11ea-bc55-0242ac130003")
         .accept(APPLICATION_JSON_UTF8))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.uuid", is(inputCarDto.getUuid())))
+        .andExpect(jsonPath("$.uuid", is(inputCarDto.getUuid().toString())))
         .andExpect(jsonPath("$.model", is(inputCarDto.getModel().name())))
         .andExpect(jsonPath("$.carNumber", is(inputCarDto.getCarNumber())))
         .andExpect(jsonPath("$.carTechnicalPassport", is(inputCarDto.getCarTechnicalPassport())))
@@ -125,7 +125,7 @@ public class CarControllerTest {
   @Test
   public void shouldDeleteCarWithStatusOk() throws Exception {
     //Then
-    mockMvc.perform(delete("/cars/b61cda14-71db-11ea-bc55-0242ac130003)")
+    mockMvc.perform(delete("/cars/ac194ac4-7290-11ea-bc55-0242ac130003")
         .accept(APPLICATION_JSON_UTF8))
         .andExpect(status().isOk());
   }

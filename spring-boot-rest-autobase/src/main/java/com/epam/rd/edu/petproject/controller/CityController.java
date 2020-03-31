@@ -50,7 +50,7 @@ public class CityController {
   }
 
   @Timed
-  @DeleteMapping(value = "/{uuid}")
+  @DeleteMapping("/{uuid}")
   public void deleteCityDto(@PathVariable String uuid) {
     cityDtoService.delete(UUID.fromString(uuid));
   }

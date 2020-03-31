@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 @Data
 @NoArgsConstructor
@@ -19,7 +20,8 @@ import lombok.NoArgsConstructor;
 public class City extends AbstractEntity<UUID> {
 
   @Id
-  @Column(name = "car_uuid", length = 36)
+  @Type(type="uuid-char")
+  @Column(name = "city_uuid", length = 36)
   private UUID uuid = UUID.randomUUID();
   @Column(name = "name")
   private String name;

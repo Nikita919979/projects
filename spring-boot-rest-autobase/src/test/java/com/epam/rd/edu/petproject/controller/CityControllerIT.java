@@ -35,12 +35,12 @@ public class CityControllerIT extends SpringAutobaseProjectTest {
         .contentType(APPLICATION_JSON_UTF8)
         .content(objectMapper.writeValueAsString(cityDto)))
         .andExpect(status().isCreated())
-        .andExpect(jsonPath("$.uuid", is(cityDto.getUuid())))
+        .andExpect(jsonPath("$.uuid", is(cityDto.getUuid().toString())))
         .andExpect(jsonPath("$.name", is(cityDto.getName())));
 
     mockMvc.perform(get("/cities/" + cityDto.getUuid().toString())
         .contentType(APPLICATION_JSON_UTF8))
-        .andExpect(jsonPath("$.uuid", is(cityDto.getUuid())))
+        .andExpect(jsonPath("$.uuid", is(cityDto.getUuid().toString())))
         .andExpect(jsonPath("$.name", is(cityDto.getName())));
   }
 
@@ -49,6 +49,7 @@ public class CityControllerIT extends SpringAutobaseProjectTest {
   public void shouldUpdateCityThroughAllLayers() throws Exception {
     //Given
     CityDto cityDto = TestCityDataGenerator.generateCityDto(1);
+    cityDto.setUuid(UUID.fromString("d326965e-71db-11ea-bc55-0242ac130003"));
 
     //Then
     mockMvc.perform(put("/cities")
@@ -56,9 +57,9 @@ public class CityControllerIT extends SpringAutobaseProjectTest {
         .content(objectMapper.writeValueAsString(cityDto)))
         .andExpect(status().isOk());
 
-    mockMvc.perform(get("/cities/caad8f82-71db-11ea-bc55-0242ac130003")
+    mockMvc.perform(get("/cities/" + cityDto.getUuid())
         .contentType(APPLICATION_JSON_UTF8))
-        .andExpect(jsonPath("$.uuid", is(cityDto.getUuid())))
+        .andExpect(jsonPath("$.uuid", is(cityDto.getUuid().toString())))
         .andExpect(jsonPath("$.name", is(cityDto.getName())));
   }
 
@@ -76,9 +77,9 @@ public class CityControllerIT extends SpringAutobaseProjectTest {
   @Test
   public void shouldGetCityThroughAllLayers() throws Exception {
     //Then
-    mockMvc.perform(get("/cities/326965e-71db-11ea-bc55-0242ac130003"))
+    mockMvc.perform(get("/cities/caad8f82-71db-11ea-bc55-0242ac130003"))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.uuid", is(UUID.fromString("d326965e-71db-11ea-bc55-0242ac130003"))))
+        .andExpect(jsonPath("$.uuid", is("caad8f82-71db-11ea-bc55-0242ac130003")))
         .andExpect(jsonPath("$.name", is("Moscow")));
   }
 
@@ -89,10 +90,10 @@ public class CityControllerIT extends SpringAutobaseProjectTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$", hasSize(3)))
         .andExpect(
-            jsonPath("$[0].uuid", is(UUID.fromString("caad8f82-71db-11ea-bc55-0242ac130003"))))
+            jsonPath("$[0].uuid", is("caad8f82-71db-11ea-bc55-0242ac130003")))
         .andExpect(
-            jsonPath("$[1].uuid", is(UUID.fromString("cfd3fb4a-71db-11ea-bc55-0242ac130003"))))
+            jsonPath("$[1].uuid", is("cfd3fb4a-71db-11ea-bc55-0242ac130003")))
         .andExpect(
-            jsonPath("$[2].uuid", is(UUID.fromString("d326965e-71db-11ea-bc55-0242ac130003"))));
+            jsonPath("$[2].uuid", is("d326965e-71db-11ea-bc55-0242ac130003")));
   }
 }

@@ -56,14 +56,12 @@ public class CarServiceImplTest {
     //Given
     CarDto carDto = TestCarDataGenerator.generateCarDtoWithRandomModel(1);
     Car car = TestCarDataGenerator.getCar(carDto);
-    Optional<Car> carOptional = Optional.of(car);
-    doReturn(carOptional).when(carRepository).findById(car.getUuid());
 
     //When
-    sut.delete(UUID.fromString("8e45a958-71db-11ea-bc55-0242ac130003"));
+    sut.delete(carDto.getUuid());
 
     //Then
-    verify(carRepository).delete(car);
+    verify(carRepository).deleteById(car.getUuid());
   }
 
   @Test

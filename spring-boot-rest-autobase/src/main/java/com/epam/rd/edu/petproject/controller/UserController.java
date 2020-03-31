@@ -52,7 +52,7 @@ public class UserController {
   }
 
   @Timed
-  @DeleteMapping(value = "/{uuid}")
+  @DeleteMapping("/{uuid}")
   public void deleteUserDto(@PathVariable String uuid) {
     userDtoService.delete(UUID.fromString(uuid));
   }

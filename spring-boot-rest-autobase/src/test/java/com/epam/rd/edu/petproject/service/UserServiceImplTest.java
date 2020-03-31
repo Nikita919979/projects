@@ -96,14 +96,12 @@ public class UserServiceImplTest {
     //Given
     UserDto userDto = TestUserDataGenerator.generateUserDtoWithRandomRole(1);
     User user = TestUserDataGenerator.getUser(userDto);
-    Optional<User> userOptional = Optional.of(user);
-    doReturn(userOptional).when(userRepository).findById(user.getUuid());
 
     //When
-    sut.delete(UUID.fromString("df9e5624-71db-11ea-bc55-0242ac130003"));
+    sut.delete(userDto.getUuid());
 
     //Then
-    verify(userRepository).delete(user);
+    verify(userRepository).deleteById(user.getUuid());
   }
 
   @Test

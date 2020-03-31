@@ -27,7 +27,7 @@ public class TransitServiceImpl implements TransitService {
 
   @Override
   public void delete(UUID key) {
-    transitRepo.delete(transitRepo.findById(key).get());
+    transitRepo.deleteById(key);
   }
 
   @Override
